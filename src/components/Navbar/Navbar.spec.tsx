@@ -1,15 +1,13 @@
 import { render, screen } from '@/utils/customRender'
+import userEvent from '@testing-library/user-event'
 import Navbar from './Navbar'
 
 describe('Navbar', () => {
   it('renders the logo and app name', () => {
     render(<Navbar />)
 
-    const logoIcon = screen.getByTestId('logo-icon')
-    expect(logoIcon).toBeInTheDocument()
-
-    const appName = screen.getByText('Vacina Fácil')
-    expect(appName).toBeInTheDocument()
+    expect(screen.getByTestId('logo-icon')).toBeInTheDocument()
+    expect(screen.getByText('Vacina Fácil')).toBeInTheDocument()
   })
 
   it('has a link to the home page', () => {
@@ -43,5 +41,29 @@ describe('Navbar', () => {
       name: /Lista de agendamentos/i,
     })
     expect(listAppointmentsLink).not.toHaveClass('text-primary')
+  })
+
+  it('renders mobile menu button on small screens', () => {
+    render(<Navbar />)
+    expect(
+      screen.getByRole('button', { name: /toggle menu/i }),
+    ).toBeInTheDocument()
+  })
+
+  it('opens mobile menu when menu button is clicked', async () => {
+    render(<Navbar />)
+    const menuButton = screen.getByRole('button', { name: /toggle menu/i })
+    await userEvent.click(menuButton)
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    expect(screen.getByText('Menu')).toBeInTheDocument()
+  })
+
+  it('closes mobile menu when a link is clicked', async () => {
+    render(<Navbar />)
+    const menuButton = screen.getByRole('button', { name: /toggle menu/i })
+    await userEvent.click(menuButton)
+    const agendarLink = screen.getAllByText('Agendar')[1]
+    await userEvent.click(agendarLink)
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 })
