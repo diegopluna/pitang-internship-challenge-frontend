@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import landingImage from '@/assets/images/landing.svg'
+import { buttonStyles } from '@/styles/common'
+import { FREEPIK_URL } from '@/constants'
 
 const Landing = () => {
   return (
@@ -18,20 +20,10 @@ const Landing = () => {
               </p>
             </div>
             <div className="flex gap-4">
-              <Link
-                to="/schedule"
-                className="inline-flex h-10 items-center justify-center rounded-md bg-primary 
-                px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 
-                focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-              >
+              <Link to="/schedule" className={buttonStyles.primary}>
                 Agendar Vacina
               </Link>
-              <Link
-                to="/list-appointments"
-                className="inline-flex h-10 items-center justify-center rounded-md bg-secondary
-                px-8 text-sm font-medium text-secondary-foreground shadow transition-colors hover:bg-secondary/90 
-                focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-              >
+              <Link to="/list-appointments" className={buttonStyles.secondary}>
                 Ver Agendamentos
               </Link>
             </div>
@@ -46,11 +38,7 @@ const Landing = () => {
             />
             <p className="text-xs text-muted-foreground mt-2">
               Designed by{' '}
-              <a
-                href="https://www.freepik.com"
-                target="_blank"
-                className="hover:underline"
-              >
+              <a href={FREEPIK_URL} target="_blank" className="hover:underline">
                 Freepik
               </a>
             </p>
