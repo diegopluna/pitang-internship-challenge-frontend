@@ -1,5 +1,5 @@
-const Home = () => {
-  return <div>Home</div>
-}
+import Landing from '@/components/Landing'
+
+const Home = () => <Landing />
 
 export default Home
