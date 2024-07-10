@@ -21,19 +21,34 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import DatePicker from '@/components/DatePicker'
 import { format } from 'date-fns'
-import axios from 'axios'
+import api, { getErrorMessage } from '@/utils/api'
+import { useModal } from '@/contexts/ModalContext'
+import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
 
 const formSchema = z.object({
-  name: z.string().trim().min(1),
-  birthDay: z.date().max(new Date(), {
-    message: 'Data de nascimento não pode ser maior que a data atual',
+  name: z.string().trim().min(1, {
+    message: 'Nome é obrigatório',
   }),
-  appointmentDate: z.date().min(new Date(), {
-    message: 'Data da consulta não pode ser menor que a data atual',
-  }),
+  birthDay: z
+    .date({
+      message: 'Data de nascimento é obrigatória',
+    })
+    .max(new Date(), {
+      message: 'Data de nascimento não pode ser maior que a data atual',
+    }),
+  appointmentDate: z
+    .date({
+      message: 'Data da consulta é obrigatória',
+    })
+    .min(new Date(new Date()), {
+      message: 'Data da consulta não pode ser menor que a data atual',
+    }),
 })
 
 const CreateAppointmentForm = () => {
+  const { openModal } = useModal()
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,17 +59,36 @@ const CreateAppointmentForm = () => {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
     const { name, birthDay, appointmentDate } = values
-    const response = await axios.post(
-      'http://localhost:3000/api/appointments/',
-      {
+    setIsLoading(true)
+    await api
+      .post('/appointments', {
         name,
         birthDay: format(birthDay, 'yyyy-MM-dd'),
         appointmentDate: appointmentDate.getTime(),
-      },
-    )
-    console.log(response)
+      })
+      .then(() => {
+        setIsLoading(false)
+        openModal('Agendamento realizado com sucesso', false)
+        form.reset()
+      })
+      .catch((error) => {
+        setIsLoading(false)
+        const message = getErrorMessage(error)
+        openModal(message, true)
+      })
+  }
+
+  const getLocalizedMinTime = () => {
+    const date = new Date()
+    date.setUTCHours(9, 0, 0, 0)
+    return date
+  }
+
+  const getLocalizedMaxTime = () => {
+    const date = new Date()
+    date.setUTCHours(22, 0, 0, 0)
+    return date
   }
 
   return (
@@ -119,8 +153,8 @@ const CreateAppointmentForm = () => {
                       minDay={new Date().getDate()}
                       selected={field.value}
                       onChange={(date) => field.onChange(date)}
-                      minTime={new Date(0, 0, 0, 6, 0)}
-                      maxTime={new Date(0, 0, 0, 20, 0)}
+                      minTime={getLocalizedMinTime()}
+                      maxTime={getLocalizedMaxTime()}
                     />
                   </FormControl>
                   <FormMessage />
@@ -129,7 +163,13 @@ const CreateAppointmentForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button className="w-full">Agendar</Button>
+            <Button
+              className="w-full"
+              disabled={isLoading || !form.formState.isValid}
+            >
+              {isLoading && <Loader2 className="size-4 mr-2 animate-spin" />}
+              {isLoading ? 'Agendando...' : 'Agendar'}
+            </Button>
           </CardFooter>
         </form>
       </Form>
