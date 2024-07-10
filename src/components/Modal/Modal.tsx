@@ -21,9 +21,15 @@ const Modal: React.FC = () => {
       <DialogContent className="sm:max-w-[425px]">
         <div className="flex flex-col items-center justify-center gap-4 py-8">
           {isError ? (
-            <CircleAlert className="text-destructive size-12" />
+            <CircleAlert
+              className="text-destructive size-12"
+              data-testid="error-icon"
+            />
           ) : (
-            <CircleCheck className="text-green-600 size-12" />
+            <CircleCheck
+              className="text-green-600 size-12"
+              data-testid="success-icon"
+            />
           )}
           <DialogHeader>
             <DialogTitle>{isError ? 'Erro!' : 'Sucesso!'}</DialogTitle>
