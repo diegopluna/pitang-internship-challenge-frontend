@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer'
+import Modal from '@/components/Modal'
 import Navbar from '@/components/Navbar'
 import { Outlet } from 'react-router-dom'
 
@@ -7,6 +8,7 @@ const BaseLayout = () => (
     <Navbar />
     <Outlet />
     <Footer />
+    <Modal />
   </div>
 )
 
