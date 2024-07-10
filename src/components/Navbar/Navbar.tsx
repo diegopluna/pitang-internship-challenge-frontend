@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -49,12 +50,16 @@ const Navbar = () => {
         <SheetTrigger asChild>
           <Button variant="ghost" className="md:hidden">
             <MenuIcon className="size-6" />
-            <span className="sr-only">Toggle Menu</span>
+            <span className="sr-only">Abrir Menu</span>
           </Button>
         </SheetTrigger>
         <SheetContent side="right" className="w-3/4 md:hidden">
           <SheetHeader>
             <SheetTitle>Menu</SheetTitle>
+            <SheetDescription className="sr-only">
+              Navegação principal do Vacina Fácil. Inclui links para agendar
+              vacinas e ver lista de agendamentos.
+            </SheetDescription>
           </SheetHeader>
           <nav className="grid gap-4 p-4">
             <Link
