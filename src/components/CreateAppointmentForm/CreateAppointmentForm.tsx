@@ -91,6 +91,27 @@ const CreateAppointmentForm = () => {
     return date
   }
 
+  const getMinTime = (selectedDate: Date | null) => {
+    const now = new Date()
+    if (selectedDate && selectedDate.toDateString() === now.toDateString()) {
+      return now
+    }
+    return getLocalizedMinTime()
+  }
+
+  const getMinDate = () => {
+    const now = new Date()
+    const minTime = getMinTime(now)
+    const maxTime = getLocalizedMaxTime()
+
+    if (minTime > maxTime) {
+      now.setDate(now.getDate() + 1)
+      now.setHours(0, 0, 0, 0)
+    }
+
+    return now.getDate()
+  }
+
   return (
     <Card className="max-w-md mx-auto p-6 sm:p-8">
       <CardHeader>
@@ -150,10 +171,10 @@ const CreateAppointmentForm = () => {
                       timeIntervals={60}
                       pastYears={0}
                       minMonth={new Date().getMonth()}
-                      minDay={new Date().getDate()}
+                      minDay={getMinDate()}
                       selected={field.value}
                       onChange={(date) => field.onChange(date)}
-                      minTime={getLocalizedMinTime()}
+                      minTime={getMinTime(field.value)}
                       maxTime={getLocalizedMaxTime()}
                     />
                   </FormControl>
