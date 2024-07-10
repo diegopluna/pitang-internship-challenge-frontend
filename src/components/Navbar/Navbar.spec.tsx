@@ -1,14 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
+import { render, screen } from '@/utils/customRender'
 import Navbar from './Navbar'
 
 describe('Navbar', () => {
   it('renders the logo and app name', () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>,
-    )
+    render(<Navbar />)
 
     const logoIcon = screen.getByTestId('logo-icon')
     expect(logoIcon).toBeInTheDocument()
@@ -18,11 +13,7 @@ describe('Navbar', () => {
   })
 
   it('has a link to the home page', () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>,
-    )
+    render(<Navbar />)
 
     const homeLink = screen.getByRole('link', { name: /Vacina Fácil/i })
     expect(homeLink).toHaveAttribute('href', '/')
