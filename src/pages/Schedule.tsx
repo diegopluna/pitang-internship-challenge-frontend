@@ -1,5 +1,5 @@
-const Schedule = () => {
-  return <div>Schedule</div>
-}
+import CreateAppointmentForm from '@/components/CreateAppointmentForm'
+
+const Schedule = () => <CreateAppointmentForm />
 
 export default Schedule
