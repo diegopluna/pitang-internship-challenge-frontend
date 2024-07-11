@@ -52,6 +52,7 @@ export interface DatePickerProps {
   filterDate?: (date: Date) => boolean
   filterTime?: (time: Date) => boolean
   ariaLabel?: string
+  placeholder?: string
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -76,6 +77,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   filterDate,
   filterTime,
   ariaLabel,
+  placeholder,
 }) => {
   const currentYear = new Date().getUTCFullYear()
   const yearRange = Array.from(
@@ -110,6 +112,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 </>
               )}
             </>
+          ) : placeholder ? (
+            <span>{placeholder}</span>
           ) : (
             <span>Selecione uma data{showTimeSelect && ' e hora'}</span>
           )}
