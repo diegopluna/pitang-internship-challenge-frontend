@@ -17,7 +17,6 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import DatePicker from '@/components/DatePicker'
 import { format } from 'date-fns'
@@ -25,6 +24,8 @@ import api, { getErrorMessage } from '@/utils/api'
 import { useModal } from '@/contexts/ModalContext'
 import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
+import { usePersistedForm } from '@/hooks/usePersistedForm'
+import { APPOINTMENT_FORM_STORAGE_KEY } from '@/constants'
 
 const formSchema = z.object({
   name: z.string().trim().min(1, {
@@ -41,7 +42,7 @@ const formSchema = z.object({
     .date({
       message: 'Data da consulta é obrigatória',
     })
-    .min(new Date(new Date()), {
+    .min(new Date(), {
       message: 'Data da consulta não pode ser menor que a data atual',
     }),
 })
@@ -49,14 +50,18 @@ const formSchema = z.object({
 const CreateAppointmentForm = () => {
   const { openModal } = useModal()
   const [isLoading, setIsLoading] = useState(false)
-  const form = useForm<z.infer<typeof formSchema>>({
+
+  const form = usePersistedForm<z.infer<typeof formSchema>>(
+    APPOINTMENT_FORM_STORAGE_KEY,
+    {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
       birthDay: undefined,
       appointmentDate: undefined,
     },
-  })
+    },
+  )
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { name, birthDay, appointmentDate } = values
@@ -70,7 +75,12 @@ const CreateAppointmentForm = () => {
       .then(() => {
         setIsLoading(false)
         openModal('Agendamento realizado com sucesso', false)
-        form.reset()
+        form.reset({
+          name: '',
+          birthDay: undefined,
+          appointmentDate: undefined,
+        })
+        localStorage.removeItem(APPOINTMENT_FORM_STORAGE_KEY)
       })
       .catch((error) => {
         setIsLoading(false)
