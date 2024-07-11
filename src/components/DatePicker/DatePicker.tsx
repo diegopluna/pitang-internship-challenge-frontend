@@ -47,6 +47,10 @@ export interface DatePickerProps {
   timeCaption?: string
   minTime?: Date
   maxTime?: Date
+  minDate?: Date
+  maxDate?: Date
+  filterDate?: (date: Date) => boolean
+  filterTime?: (time: Date) => boolean
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -66,6 +70,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
   timeCaption = 'Horário',
   minTime,
   maxTime,
+  minDate,
+  maxDate,
+  filterDate,
+  filterTime,
 }) => {
   const currentYear = new Date().getUTCFullYear()
   const yearRange = Array.from(
@@ -106,8 +114,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <ReactDatePicker
-          minDate={new Date(currentYear - pastYears, minMonth, minDay)}
+          minDate={
+            minDate || new Date(currentYear - pastYears, minMonth, minDay)
+          }
           maxDate={
+            maxDate ||
             new Date(
               currentYear + futureYears,
               maxMonth,
@@ -133,6 +144,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
           calendarClassName="react-datepicker-custom"
           timeClassName={() => 'react-datepicker__time-custom'}
           showPopperArrow={false}
+          filterDate={filterDate}
+          filterTime={filterTime}
           renderCustomHeader={({
             date,
             changeYear,
