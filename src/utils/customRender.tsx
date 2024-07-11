@@ -1,3 +1,4 @@
+import { ModalProvider } from '@/contexts/ModalContext'
 import { render, RenderOptions } from '@testing-library/react'
 import { ReactElement } from 'react'
 import { MemoryRouter, MemoryRouterProps } from 'react-router-dom'
@@ -12,7 +13,11 @@ interface AppProvidersProps {
 }
 
 const AppProviders = ({ children, routerProps }: AppProvidersProps) => {
-  return <MemoryRouter {...routerProps}>{children}</MemoryRouter>
+  return (
+    <ModalProvider>
+      <MemoryRouter {...routerProps}>{children}</MemoryRouter>
+    </ModalProvider>
+  )
 }
 
 const customRender = (

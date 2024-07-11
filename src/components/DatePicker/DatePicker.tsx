@@ -51,6 +51,7 @@ export interface DatePickerProps {
   maxDate?: Date
   filterDate?: (date: Date) => boolean
   filterTime?: (time: Date) => boolean
+  ariaLabel?: string
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -74,6 +75,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   maxDate,
   filterDate,
   filterTime,
+  ariaLabel,
 }) => {
   const currentYear = new Date().getUTCFullYear()
   const yearRange = Array.from(
@@ -95,6 +97,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             !selected && 'text-muted-foreground',
             className,
           )}
+          aria-label={ariaLabel}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {selected ? (

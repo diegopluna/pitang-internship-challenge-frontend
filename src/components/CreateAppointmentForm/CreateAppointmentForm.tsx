@@ -164,6 +164,7 @@ const CreateAppointmentForm = () => {
                       maxDate={new Date()}
                       selected={field.value}
                       onChange={(date) => field.onChange(date)}
+                      ariaLabel="Data de nascimento"
                     />
                   </FormControl>
                   <FormMessage />
@@ -197,6 +198,7 @@ const CreateAppointmentForm = () => {
                         }
                         return true
                       }}
+                      ariaLabel="Data e hora do agendamento"
                     />
                   </FormControl>
                   <FormMessage />
@@ -205,10 +207,7 @@ const CreateAppointmentForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button
-              className="w-full"
-              disabled={isLoading || !form.formState.isValid}
-            >
+            <Button className="w-full" disabled={isLoading}>
               {isLoading && <Loader2 className="size-4 mr-2 animate-spin" />}
               {isLoading ? 'Agendando...' : 'Agendar'}
             </Button>
