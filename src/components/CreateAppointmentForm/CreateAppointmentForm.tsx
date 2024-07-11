@@ -54,12 +54,12 @@ const CreateAppointmentForm = () => {
   const form = usePersistedForm<z.infer<typeof formSchema>>(
     APPOINTMENT_FORM_STORAGE_KEY,
     {
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      birthDay: undefined,
-      appointmentDate: undefined,
-    },
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        name: '',
+        birthDay: undefined,
+        appointmentDate: undefined,
+      },
     },
   )
 
@@ -104,22 +104,25 @@ const CreateAppointmentForm = () => {
   const getMinTime = (selectedDate: Date | null) => {
     const now = new Date()
     if (selectedDate && selectedDate.toDateString() === now.toDateString()) {
-      return now
+      const minTime = getLocalizedMinTime()
+      if (now > minTime) {
+        return now
+      }
+      return minTime
     }
     return getLocalizedMinTime()
   }
 
   const getMinDate = () => {
     const now = new Date()
-    const minTime = getMinTime(now)
     const maxTime = getLocalizedMaxTime()
 
-    if (minTime > maxTime) {
+    if (now > maxTime) {
       now.setDate(now.getDate() + 1)
-      now.setHours(0, 0, 0, 0)
+      now.setUTCHours(0, 0, 0, 0)
     }
 
-    return now.getDate()
+    return now
   }
 
   return (
@@ -158,8 +161,7 @@ const CreateAppointmentForm = () => {
                     <DatePicker
                       showYearDropdown
                       futureYears={0}
-                      maxMonth={new Date().getMonth()}
-                      maxDay={31}
+                      maxDate={new Date()}
                       selected={field.value}
                       onChange={(date) => field.onChange(date)}
                     />
@@ -180,12 +182,21 @@ const CreateAppointmentForm = () => {
                       showTimeSelect
                       timeIntervals={60}
                       pastYears={0}
-                      minMonth={new Date().getMonth()}
-                      minDay={getMinDate()}
+                      minDate={getMinDate()}
                       selected={field.value}
                       onChange={(date) => field.onChange(date)}
                       minTime={getMinTime(field.value)}
                       maxTime={getLocalizedMaxTime()}
+                      filterTime={(time) => {
+                        const selectedDate = field.value || new Date()
+                        const now = new Date()
+                        if (
+                          selectedDate.toDateString() === now.toDateString()
+                        ) {
+                          return time >= getMinTime(selectedDate)
+                        }
+                        return true
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
