@@ -18,7 +18,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import DatePicker from '@/components/DatePicker'
 import { Loader2 } from 'lucide-react'
-import { useCreateAppointmentForm } from '@/hooks/use-create=appointment-form'
+import { useCreateAppointmentForm } from '@/hooks/use-create-appointment-form'
 import {
   getMinDate,
   getMinTime,
