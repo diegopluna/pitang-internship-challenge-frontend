@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
-import api from '@/utils/api'
+import api, { handleApiError } from '@/utils/api'
 
 interface AppointmentData {
   name: string
@@ -19,6 +19,8 @@ export const useCreateAppointment = () => {
         birthDay: format(data.birthDay, 'yyyy-MM-dd'),
         appointmentDate: data.appointmentDate.getTime(),
       })
+    } catch( error) {
+      throw handleApiError(error)
     } finally {
       setIsLoading(false)
     }
