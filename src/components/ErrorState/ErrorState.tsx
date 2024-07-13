@@ -6,7 +6,10 @@ interface ErrorStateProps {
 
 const ErrorState: React.FC<ErrorStateProps> = ({ onRetry }) => {
   return (
-    <div className="mx-auto max-w-md text-center">
+    <div
+      className="mx-auto max-w-md text-center"
+      data-testid="error-state-container"
+    >
       <div className="mx-auto h-12 w-12 text-primary" />
       <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
         Ops, algo deu errado!
