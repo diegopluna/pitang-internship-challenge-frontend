@@ -88,8 +88,25 @@ const CreateAppointmentForm = () => {
                       timeIntervals={60}
                       pastYears={0}
                       minDate={getMinDate()}
-                      selected={field.value || getMinDate()}
-                      onChange={(date) => field.onChange(date)}
+                      selected={field.value}
+                      onChange={(date) => {
+                        if (!date) return
+                        date.setMinutes(0, 0, 0)
+                        const minTime = getMinTime(date)
+                        const maxTime = getMaxTime()
+
+                        if (minTime.getHours() >= maxTime.getHours()) {
+                          return
+                        }
+
+                        if (date.getHours() < minTime.getHours()) {
+                          date.setHours(minTime.getHours())
+                        } else if (date.getHours() === minTime.getHours()) {
+                          date.setHours
+                        }
+
+                        field.onChange(date)
+                      }}
                       minTime={getMinTime(field.value)}
                       maxTime={getMaxTime()}
                       filterTime={(time) =>
