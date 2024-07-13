@@ -65,16 +65,16 @@ const CreateAppointmentForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       await createAppointment(values)
-        openModal('Agendamento realizado com sucesso', false)
-        form.reset({
-          name: '',
-          birthDay: undefined,
-          appointmentDate: undefined,
-        })
-        localStorage.removeItem(APPOINTMENT_FORM_STORAGE_KEY)
+      openModal('Agendamento realizado com sucesso', false)
+      form.reset({
+        name: '',
+        birthDay: undefined,
+        appointmentDate: undefined,
+      })
+      localStorage.removeItem(APPOINTMENT_FORM_STORAGE_KEY)
     } catch (error) {
-        const message = getErrorMessage(error)
-        openModal(message, true)
+      const message = getErrorMessage(error)
+      openModal(message, true)
     }
   }
 
