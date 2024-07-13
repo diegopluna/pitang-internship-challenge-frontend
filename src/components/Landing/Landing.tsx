@@ -19,10 +19,10 @@ const Landing = () => {
             </p>
           </div>
           <div className="flex gap-4">
-            <Button>
+            <Button asChild>
               <Link to="/schedule">Agendar Vacina</Link>
             </Button>
-            <Button variant="outline">
+            <Button variant="outline" asChild>
               <Link to="/list-appointments">Ver Agendamentos</Link>
             </Button>
           </div>
