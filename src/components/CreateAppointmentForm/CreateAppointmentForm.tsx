@@ -108,7 +108,9 @@ const CreateAppointmentForm = () => {
 
     if (now > maxTime) {
       now.setDate(now.getDate() + 1)
-      now.setUTCHours(0, 0, 0, 0)
+      now.setUTCHours(9, 0, 0, 0)
+    } else if (now < getLocalizedMinTime()) {
+      now.setUTCHours(9, 0, 0, 0)
     }
 
     return now
@@ -173,8 +175,14 @@ const CreateAppointmentForm = () => {
                       timeIntervals={60}
                       pastYears={0}
                       minDate={getMinDate()}
-                      selected={field.value}
-                      onChange={(date) => field.onChange(date)}
+                      selected={field.value || getMinDate()}
+                      onChange={(date) => {
+                        if (date) {
+                          field.onChange(date)
+                        } else {
+                          field.onChange(date)
+                        }
+                      }}
                       minTime={getMinTime(field.value)}
                       maxTime={getLocalizedMaxTime()}
                       filterTime={(time) => {
