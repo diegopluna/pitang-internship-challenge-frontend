@@ -95,7 +95,7 @@ const CreateAppointmentForm = () => {
                         const minTime = getMinTime(date)
                         const maxTime = getMaxTime()
 
-                        if (minTime.getHours() >= maxTime.getHours()) {
+                        if (minTime.getHours() > maxTime.getHours()) {
                           return
                         }
 
