@@ -88,7 +88,7 @@ const CreateAppointmentForm = () => {
                       timeIntervals={60}
                       pastYears={0}
                       minDate={getMinDate()}
-                      selected={field.value}
+                      selected={field.value || getMinDate()}
                       onChange={(date) => {
                         if (!date) return
                         date.setMinutes(0, 0, 0)
