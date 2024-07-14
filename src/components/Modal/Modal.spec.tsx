@@ -1,7 +1,7 @@
 import { screen, fireEvent, act } from '@testing-library/react'
 import { render } from '@/utils/customRender'
 import Modal from './Modal'
-import { ModalProvider, useModal } from '@/contexts/ModalContext'
+import { useModal } from '@/contexts/ModalContext'
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -19,10 +19,10 @@ const TestComponent = () => {
 describe('Modal', () => {
   it('renders correctly when opened', () => {
     render(
-      <ModalProvider>
+      <>
         <TestComponent />
         <Modal />
-      </ModalProvider>,
+      </>,
     )
 
     fireEvent.click(screen.getByText('Open Modal'))
@@ -42,10 +42,10 @@ describe('Modal', () => {
     }
 
     render(
-      <ModalProvider>
+      <>
         <TestComponentWithHook />
         <Modal />
-      </ModalProvider>,
+      </>,
     )
     act(() => {
       openModalFunction('Error message', true)
@@ -58,10 +58,10 @@ describe('Modal', () => {
 
   it('closes when the close button is clicked', () => {
     render(
-      <ModalProvider>
+      <>
         <TestComponent />
         <Modal />
-      </ModalProvider>,
+      </>,
     )
 
     fireEvent.click(screen.getByText('Open Modal'))
@@ -81,10 +81,10 @@ describe('Modal', () => {
     }
 
     render(
-      <ModalProvider>
+      <>
         <TestComponentWithHook />
         <Modal />
-      </ModalProvider>,
+      </>,
     )
 
     act(() => {
