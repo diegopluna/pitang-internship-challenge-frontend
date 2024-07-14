@@ -22,17 +22,19 @@ describe('Navbar', () => {
 
     const scheduleLink = screen.getByRole('link', { name: /Agendar/i })
     expect(scheduleLink).toBeInTheDocument()
-    expect(scheduleLink).toHaveAttribute('href', '/schedule')
+    expect(scheduleLink).toHaveAttribute('href', '/agendamentos/criar')
 
     const listAppointmentsLink = screen.getByRole('link', {
       name: /Lista de agendamentos/i,
     })
     expect(listAppointmentsLink).toBeInTheDocument()
-    expect(listAppointmentsLink).toHaveAttribute('href', '/list-appointments')
+    expect(listAppointmentsLink).toHaveAttribute('href', '/agendamentos')
   })
 
   it('applies active class to current route', () => {
-    render(<Navbar />, { routerProps: { initialEntries: ['/schedule'] } })
+    render(<Navbar />, {
+      routerProps: { initialEntries: ['/agendamentos/criar'] },
+    })
 
     const scheduleLink = screen.getByRole('link', { name: /Agendar/i })
     expect(scheduleLink).toHaveClass('text-primary')
