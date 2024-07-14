@@ -1,4 +1,5 @@
 import { ModalProvider } from '@/contexts/ModalContext'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, RenderOptions } from '@testing-library/react'
 import { ReactElement } from 'react'
 import { MemoryRouter, MemoryRouterProps } from 'react-router-dom'
@@ -12,11 +13,15 @@ interface AppProvidersProps {
   routerProps?: MemoryRouterProps
 }
 
+const queryClient = new QueryClient()
+
 const AppProviders = ({ children, routerProps }: AppProvidersProps) => {
   return (
-    <ModalProvider>
-      <MemoryRouter {...routerProps}>{children}</MemoryRouter>
-    </ModalProvider>
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>
+        <MemoryRouter {...routerProps}>{children}</MemoryRouter>
+      </ModalProvider>
+    </QueryClientProvider>
   )
 }
 
