@@ -1,6 +1,6 @@
 .react-datepicker {
-  @apply bg-popover text-popover-foreground shadow-md border border-input p-3 rounded-md;
-  font-family: inherit;
+  @apply bg-background text-foreground border border-border shadow-md rounded-md;
+  font-family: var(--font-body);
 }
 
 .react-datepicker__month-container {
@@ -8,7 +8,7 @@
 }
 
 .react-datepicker__header {
-  @apply bg-transparent border-0 p-0;
+  @apply bg-background border-none p-0;
 }
 
 .react-datepicker__current-month {
@@ -72,7 +72,7 @@
 }
 
 .react-datepicker__time {
-  @apply bg-popover;
+  @apply bg-background;
 }
 
 .react-datepicker__time-box {
@@ -80,7 +80,7 @@
 }
 
 .react-datepicker__time-list {
-  @apply bg-popover text-popover-foreground;
+  @apply bg-background text-foreground;
 }
 
 .react-datepicker__time-list-item {
@@ -89,4 +89,34 @@
 
 .react-datepicker__time-list-item--selected {
   @apply bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground;
+}
+
+.react-datepicker__year-read-view,
+.react-datepicker__month-read-view,
+.react-datepicker__month-year-read-view {
+  @apply border border-transparent rounded-md;
+}
+
+.react-datepicker__year-dropdown,
+.react-datepicker__month-dropdown,
+.react-datepicker__month-year-dropdown {
+  @apply bg-background border border-border rounded-md;
+}
+
+.react-datepicker__year-option,
+.react-datepicker__month-option,
+.react-datepicker__month-year-option {
+  @apply hover:bg-accent hover:text-accent-foreground;
+}
+
+.react-datepicker__portal {
+  @apply bg-background/80 flex items-center justify-center;
+}
+
+.react-datepicker__today-button {
+  @apply bg-muted text-muted-foreground border-t border-border font-semibold;
+}
+
+.react-datepicker__close-icon::after {
+  @apply bg-primary text-primary-foreground;
 }

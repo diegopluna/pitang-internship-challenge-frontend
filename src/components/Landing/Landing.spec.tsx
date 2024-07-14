@@ -22,7 +22,7 @@ describe('Landing', () => {
     render(<Landing />)
     const scheduleButton = screen.getByRole('link', { name: /Agendar Vacina/i })
     expect(scheduleButton).toBeInTheDocument()
-    expect(scheduleButton).toHaveAttribute('href', '/schedule')
+    expect(scheduleButton).toHaveAttribute('href', '/agendamentos/criar')
   })
 
   it('renders the "Ver Agendamentos" button with correct link', () => {
@@ -31,7 +31,7 @@ describe('Landing', () => {
       name: /Ver Agendamentos/i,
     })
     expect(listAppointmentsButton).toBeInTheDocument()
-    expect(listAppointmentsButton).toHaveAttribute('href', '/list-appointments')
+    expect(listAppointmentsButton).toHaveAttribute('href', '/agendamentos')
   })
 
   it('shows the image attribution', () => {

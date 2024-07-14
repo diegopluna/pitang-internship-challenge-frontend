@@ -29,19 +29,19 @@ const Navbar = () => {
       </Link>
       <nav className="ml-auto hidden md:flex md:gap-4">
         <Link
-          to="/schedule"
+          to="/agendamentos/criar"
           className={cn(
             'text-muted-foreground hover:text-primary',
-            location.pathname === '/schedule' && 'text-primary',
+            location.pathname === '/agendamentos/criar' && 'text-primary',
           )}
         >
           Agendar
         </Link>
         <Link
-          to="/list-appointments"
+          to="/agendamentos"
           className={cn(
             'text-muted-foreground hover:text-primary',
-            location.pathname === '/list-appointments' && 'text-primary',
+            location.pathname === '/agendamentos' && 'text-primary',
           )}
         >
           Lista de agendamentos
@@ -64,20 +64,20 @@ const Navbar = () => {
           </SheetHeader>
           <nav className="grid gap-4 p-4">
             <Link
-              to="/schedule"
+              to="/agendamentos/criar"
               className={cn(
                 'text-muted-foreground hover:text-primary',
-                location.pathname === '/schedule' && 'text-primary',
+                location.pathname === '/agendamentos/criar' && 'text-primary',
               )}
               onClick={handleLinkClick}
             >
               Agendar
             </Link>
             <Link
-              to="/list-appointments"
+              to="/agendamentos"
               className={cn(
                 'text-muted-foreground hover:text-primary',
-                location.pathname === '/list-appointments' && 'text-primary',
+                location.pathname === '/agendamentos' && 'text-primary',
               )}
               onClick={handleLinkClick}
             >

@@ -5,28 +5,45 @@ const api = axios.create({
   baseURL: env.VITE_API_URL,
 })
 
-interface ErrorIssue {
-  _errors: string[];
+interface ApiErrorResponse {
+  message: string
+  errors?: Record<string, string[]>
 }
 
-interface ErrorResponse {
-  message: string;
-  issues?: Record<string, ErrorIssue>;
-}
-
-export const getErrorMessage = (error: unknown): string => {
-  if (error instanceof AxiosError) {
-    const data = error.response?.data as ErrorResponse;
-    if (data?.message === 'Erro de validação' && data.issues) {
-      for (const [key, value] of Object.entries(data.issues)) {
-        if (key !== '_errors' && Array.isArray(value._errors)) {
-          return value._errors[0];
-        }
-      }
-    }
-    return data?.message || 'Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente.';
+export class AppError extends Error {
+  constructor(
+    public message: string,
+    public code?: string,
+    public details?: Record<string, string[]>
+  ) {
+    super(message)
+    this.name = 'AppError'
   }
-  return 'Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.';
-};
+}
+
+export function handleApiError(error: unknown): AppError {
+  if (error instanceof AxiosError && error.response) {
+    const data = error.response.data as ApiErrorResponse
+    return new AppError(
+      data.message || 'Ocorreu um erro inesperado',
+      error.response.status.toString(),
+      data.errors
+    )
+  } else if (error instanceof Error) {
+    return new AppError(error.message)
+  } else {
+    return new AppError('Ocorreu um erro inesperado')
+  }
+}
+
+export function getErrorMessage(error: unknown): string {
+  if (error instanceof AppError) {
+    return error.message
+  } else if (error instanceof Error) {
+    return error.message
+  } else {
+    return 'Ocorreu um erro inesperado'
+  }
+}
 
 export default api
