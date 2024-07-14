@@ -46,10 +46,10 @@ const Modal: React.FC = () => {
             <Button
               onClick={() => {
                 closeModal()
-                navigate('/list-appointments')
+                navigate('/agendamentos')
               }}
             >
-              Ver Compromissos
+              Ver Agendamentos
             </Button>
           )}
         </DialogFooter>
