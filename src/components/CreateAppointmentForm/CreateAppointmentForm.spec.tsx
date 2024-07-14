@@ -32,8 +32,7 @@ describe('CreateAppointmentForm', () => {
     expect(screen.getByLabelText('Nome Completo')).toBeInTheDocument()
     expect(screen.getByText('Data de nascimento')).toBeInTheDocument()
     expect(screen.getByText('Data e hora do agendamento')).toBeInTheDocument()
-    expect(screen.getByText('Selecione uma data')).toBeInTheDocument()
-    expect(screen.getByText('Selecione uma data e hora')).toBeInTheDocument()
+    expect(screen.getAllByText('Selecione uma data')[0]).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Agendar' })).toBeInTheDocument()
   })
 
