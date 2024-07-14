@@ -2,8 +2,9 @@ import { ColumnDef } from '@tanstack/react-table'
 import { format, isSameDay } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '../ui/button'
-import { FilePen, ArrowUpDown } from 'lucide-react'
+import { ArrowUpDown } from 'lucide-react'
 import { cn } from '@/utils/cn'
+import ActionsDropdown from './ActionsDropdown'
 
 export type Appointment = {
   id: string
@@ -98,12 +99,11 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     id: 'actions',
     header: () => <div className="text-right">Ações</div>,
-    cell: () => {
+    cell: ({ row }) => {
+      const appointment = row.original
       return (
         <div className="text-right">
-          <Button variant="ghost" size="icon">
-            <FilePen className="size-5" />
-          </Button>
+          <ActionsDropdown appointment={appointment} />
         </div>
       )
     },
