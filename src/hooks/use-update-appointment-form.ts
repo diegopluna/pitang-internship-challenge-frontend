@@ -8,7 +8,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
 import { AppError } from "@/utils/api";
 
-const formSchema = z.object({
+
+
+export const useUpdateAppointmentForm = (appointment: Appointment) => {
+  const { openModal } = useModal()
+  const { updateAppointment, isLoading } = useUpdateAppointment()
+
+
+  const formSchema = z.object({
   name: z.string().trim().min(1, {
     message: 'Nome é obrigatório',
   }),
@@ -19,23 +26,21 @@ const formSchema = z.object({
     .max(new Date(), {
       message: 'Data de nascimento não pode ser maior que a data atual',
     }),
-  appointmentDate: z
-    .date({
+  appointmentDate: z.union([
+    z.date({
       message: 'Data da consulta é obrigatória',
     })
     .min(new Date(), {
       message: 'Data da consulta não pode ser menor que a data atual',
     }),
+    z.date()
+  ]),
   vaccinationComplete: z.boolean({
     message: "Estado da vacinação é obrigatório"
   })
 })
 
-type FormData = z.infer<typeof formSchema>
-
-export const useUpdateAppointmentForm = (appointment: Appointment) => {
-  const { openModal } = useModal()
-  const { updateAppointment, isLoading } = useUpdateAppointment()
+  type FormData = z.infer<typeof formSchema>
 
   const form = usePersistedForm<FormData>(APPOINTMENT_FORM_STORAGE_KEY_EDIT + '-' + appointment.id, {
     resolver: zodResolver(formSchema),
