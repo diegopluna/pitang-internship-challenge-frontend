@@ -1,33 +1,35 @@
+import { useUpdateAppointmentForm } from '@/hooks/use-update-appointment-form'
+import { Appointment } from '../AppointmentsDataTable/columns'
+import FormLayout from '@/layouts/FormLayout'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import DatePicker from '@/components/DatePicker'
-import { useCreateAppointmentForm } from '@/hooks/use-create-appointment-form'
+} from '../ui/form'
+import { Input } from '../ui/input'
+import DatePicker from '../DatePicker'
 import {
+  filterAppointmentTime,
+  getMaxTime,
   getMinDate,
   getMinTime,
-  getMaxTime,
-  filterAppointmentTime,
 } from '@/utils/date-utils'
-import FormLayout from '@/layouts/FormLayout'
+import { Switch } from '../ui/switch'
 
-const CreateAppointmentForm = () => {
-  const { form, onSubmit, isLoading } = useCreateAppointmentForm()
+const EditAppointmentForm = ({ appointment }: { appointment: Appointment }) => {
+  const { form, onSubmit, isLoading } = useUpdateAppointmentForm(appointment)
 
   return (
     <FormLayout
-      title="Agende sua vacina para a COVID-19"
-      description="Preencha o formulário para marcar sua vacinação."
+      title="Editar agendamento"
+      description="Edite os dados do agendamento"
       form={form}
       onSubmit={onSubmit}
       isLoading={isLoading}
-      loadingMessage="Agendando..."
-      submitMessage="Agendar"
+      loadingMessage="Atualizando agendamento..."
+      submitMessage="Atualizar agendamento"
     >
       <FormField
         control={form.control}
@@ -75,7 +77,7 @@ const CreateAppointmentForm = () => {
                 timeIntervals={60}
                 pastYears={0}
                 minDate={getMinDate()}
-                selected={field.value || getMinDate()}
+                selected={field.value}
                 onChange={(date) => {
                   if (!date) return
                   date.setMinutes(0, 0, 0)
@@ -106,8 +108,21 @@ const CreateAppointmentForm = () => {
           </FormItem>
         )}
       />
+      <FormField
+        control={form.control}
+        name="vaccinationComplete"
+        render={({ field }) => (
+          <FormItem className="grid gap-2s">
+            <FormLabel>Vacinação concluída</FormLabel>
+            <FormControl>
+              <Switch checked={field.value} onCheckedChange={field.onChange} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </FormLayout>
   )
 }
 
-export default CreateAppointmentForm
+export default EditAppointmentForm

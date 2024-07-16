@@ -32,8 +32,8 @@ const ActionsDropdown = ({ appointment }: { appointment: Appointment }) => {
           Marcar como{' '}
           {!appointment.vaccinationComplete ? 'vacinado' : 'não vacinado'}
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link to={`/appointments/${appointment.id}`}>Ver detalhes</Link>
+        <DropdownMenuItem asChild>
+          <Link to={`/agendamentos/${appointment.id}/editar`}>Editar</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
