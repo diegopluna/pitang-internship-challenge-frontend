@@ -6,8 +6,7 @@ export const getLocalizedTime = (hours: number, minutes: number = 0): Date => {
 
 export const getMinTime = (selectedDate: Date | null): Date => {
   const now = new Date();
-  const minTime = getLocalizedTime(9); // 9 AM
-
+  const minTime = getLocalizedTime(9);
   if (selectedDate && selectedDate.toDateString() === now.toDateString()) {
     if (now > minTime) {
       const nextHour = new Date(now);
@@ -19,13 +18,13 @@ export const getMinTime = (selectedDate: Date | null): Date => {
 }
 
 export const getMaxTime = (): Date => {
-  return getLocalizedTime(22) // 10 PM
+  return getLocalizedTime(22)
 }
 
 export const getMinDate = (): Date => {
   const now = new Date()
   const maxTime = getMaxTime()
-  const minTime = getLocalizedTime(9) // 9 AM
+  const minTime = getLocalizedTime(9)
 
   if (now > maxTime) {
     now.setUTCDate(now.getUTCDate() + 1)

@@ -125,7 +125,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent
+          className="w-auto p-0 bg-transparent border-none shadow-none"
+          align="start"
+        >
           <ReactDatePicker
             minDate={
               minDate || new Date(currentYear - pastYears, minMonth, minDay)
