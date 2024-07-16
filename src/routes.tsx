@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Schedule from './pages/Schedule'
 import ListAppointments from './pages/ListAppointments'
 import NotFound from './components/NotFound'
+import EditAppointment from './pages/EditAppointment'
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -13,6 +14,7 @@ const AppRoutes = () => (
         <Route path="/agendamentos">
           <Route index element={<ListAppointments />} />
           <Route path="criar" element={<Schedule />} />
+          <Route path=":id/editar" element={<EditAppointment />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
