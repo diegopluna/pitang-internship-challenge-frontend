@@ -74,7 +74,7 @@ describe('AppointmentsDataTable', () => {
 
     const originalNames = screen
       .getAllByRole('row')
-      .slice(1) // Skip header row
+      .slice(1)
       .map((row) => row.querySelector('td')?.textContent)
       .filter(Boolean)
 
