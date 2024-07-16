@@ -1,11 +1,11 @@
-import { screen, fireEvent, act } from '@testing-library/react'
-import { render } from '@/utils/customRender'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import Modal from './Modal'
-import { useModal } from '@/contexts/ModalContext'
+import { ModalProvider, useModal } from '@/contexts/ModalContext'
+import { expect, describe, it, vi } from 'vitest'
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
+  useNavigate: () => vi.fn(),
 }))
 
 const TestComponent = () => {
@@ -19,10 +19,10 @@ const TestComponent = () => {
 describe('Modal', () => {
   it('renders correctly when opened', () => {
     render(
-      <>
+      <ModalProvider>
         <TestComponent />
         <Modal />
-      </>,
+      </ModalProvider>,
     )
 
     fireEvent.click(screen.getByText('Open Modal'))
@@ -42,10 +42,10 @@ describe('Modal', () => {
     }
 
     render(
-      <>
+      <ModalProvider>
         <TestComponentWithHook />
         <Modal />
-      </>,
+      </ModalProvider>,
     )
     act(() => {
       openModalFunction('Error message', true)
@@ -58,10 +58,10 @@ describe('Modal', () => {
 
   it('closes when the close button is clicked', () => {
     render(
-      <>
+      <ModalProvider>
         <TestComponent />
         <Modal />
-      </>,
+      </ModalProvider>,
     )
 
     fireEvent.click(screen.getByText('Open Modal'))
@@ -81,10 +81,10 @@ describe('Modal', () => {
     }
 
     render(
-      <>
+      <ModalProvider>
         <TestComponentWithHook />
         <Modal />
-      </>,
+      </ModalProvider>,
     )
 
     act(() => {

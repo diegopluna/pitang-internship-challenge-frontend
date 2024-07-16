@@ -1,17 +1,18 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import DatePicker from './DatePicker'
 
 describe('DatePicker', () => {
-  const mockOnChange = jest.fn()
+  const mockOnChange = vi.fn()
 
   beforeEach(() => {
-    jest.useFakeTimers()
-    jest.setSystemTime(new Date(2023, 3, 15)) // April 15, 2023
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date(2023, 3, 15))
   })
 
   afterEach(() => {
-    jest.useRealTimers()
-    jest.clearAllMocks()
+    vi.useRealTimers()
+    vi.clearAllMocks()
   })
 
   it('renders correctly with default props', () => {
@@ -27,29 +28,34 @@ describe('DatePicker', () => {
 
   it('opens the date picker when clicked', async () => {
     render(<DatePicker onChange={mockOnChange} selected={null} />)
-    const button = screen.getByRole('button')
-    fireEvent.click(button)
-    await waitFor(() => {
-      expect(screen.getByText('Abril')).toBeInTheDocument()
-      expect(screen.getByText('2023')).toBeInTheDocument()
+    const button = screen.getByRole('button', { name: /selecione uma data/i })
+
+    await act(async () => {
+      fireEvent.click(button)
+      vi.runAllTimers()
     })
+
+    const monthElement = screen.getByText('Abril', { exact: false })
+    expect(monthElement).toBeInTheDocument()
+
+    const yearElement = screen.getByText('2023', { exact: false })
+    expect(yearElement).toBeInTheDocument()
   })
 
   it('calls onChange when a date is selected', async () => {
     render(<DatePicker onChange={mockOnChange} selected={null} />)
     const button = screen.getByRole('button', { name: /selecione uma data/i })
-    fireEvent.click(button)
 
-    await waitFor(() => {
-      const dayElements = screen.getAllByText(/^(0?[1-9]|[12][0-9]|3[01])$/)
-      const dayElement = dayElements.find(
-        (element) => element.textContent === '15',
-      )
-      if (dayElement) {
-        fireEvent.click(dayElement)
-      } else {
-        throw new Error('Day element not found')
-      }
+    await act(async () => {
+      fireEvent.click(button)
+      vi.runAllTimers()
+    })
+
+    const dayElement = screen.getByText('15')
+
+    await act(async () => {
+      fireEvent.click(dayElement)
+      vi.runAllTimers()
     })
 
     expect(mockOnChange).toHaveBeenCalledWith(

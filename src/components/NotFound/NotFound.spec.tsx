@@ -1,4 +1,5 @@
 import { render, screen } from '@/utils/customRender'
+import { describe, it, expect } from 'vitest'
 import NotFound from './NotFound'
 
 describe('NotFound', () => {
