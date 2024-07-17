@@ -1,4 +1,5 @@
 import { screen, fireEvent, waitFor, within } from '@testing-library/react'
+import { describe, it, expect } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import { render } from '@/utils/customRender'
 import { columns } from '@/components/AppointmentsDataTable/columns'
@@ -73,7 +74,7 @@ describe('AppointmentsDataTable', () => {
 
     const originalNames = screen
       .getAllByRole('row')
-      .slice(1) // Skip header row
+      .slice(1)
       .map((row) => row.querySelector('td')?.textContent)
       .filter(Boolean)
 

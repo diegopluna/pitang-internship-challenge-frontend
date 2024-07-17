@@ -1,22 +1,23 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import CreateAppointmentForm from './CreateAppointmentForm'
 import { ModalProvider } from '@/contexts/ModalContext'
 
-jest.mock('@/utils/api', () => ({
+vi.mock('@/utils/api', () => ({
   default: {
-    post: jest.fn(),
+    post: vi.fn(),
   },
-  getErrorMessage: jest.fn(),
+  getErrorMessage: vi.fn(),
 }))
 
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => jest.fn(),
+vi.mock('react-router-dom', () => ({
+  useNavigate: () => vi.fn(),
 }))
 
 describe('CreateAppointmentForm', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it('renders the form correctly', () => {

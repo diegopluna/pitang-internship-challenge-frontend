@@ -1,8 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
 import ErrorState from './ErrorState'
 
 describe('ErrorState', () => {
-  const mockOnRetry = jest.fn()
+  const mockOnRetry = vi.fn()
 
   beforeEach(() => {
     mockOnRetry.mockClear()

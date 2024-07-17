@@ -1,5 +1,6 @@
 import { render, screen } from '@/utils/customRender'
 import Footer from './Footer'
+import { describe, it, expect } from 'vitest'
 import { COPYRIGHT_YEAR, APP_NAME } from '@/constants'
 
 describe('Footer', () => {

@@ -16,7 +16,7 @@ interface TableFiltersProps<TData> {
 const TableFilters = <TData,>({ table }: TableFiltersProps<TData>) => {
   return (
     <div className="px-6 py-4 border-b">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 sm:flex-row flex-col sm:justify-start sm:items-start">
         <Input
           placeholder="Filtrar por nome"
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
@@ -24,18 +24,20 @@ const TableFilters = <TData,>({ table }: TableFiltersProps<TData>) => {
             table.getColumn('name')?.setFilterValue(event.target.value)
           }
         />
-        <DatePicker
-          isClearable
-          selected={
-            (table.getColumn('appointmentDate')?.getFilterValue() as Date) ??
-            null
-          }
-          onChange={(date) =>
-            table.getColumn('appointmentDate')?.setFilterValue(date)
-          }
-          placeholder="Filtrar por data de agendamento"
-          data-testid="date-picker-button"
-        />
+        <div className="w-full sm:w-auto">
+          <DatePicker
+            isClearable
+            selected={
+              (table.getColumn('appointmentDate')?.getFilterValue() as Date) ??
+              null
+            }
+            onChange={(date) =>
+              table.getColumn('appointmentDate')?.setFilterValue(date)
+            }
+            placeholder="Filtrar por data de agendamento"
+            data-testid="date-picker-button"
+          />
+        </div>
         <Select
           value={
             (table
