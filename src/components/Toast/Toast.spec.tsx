@@ -35,7 +35,7 @@ describe('Toast', () => {
   it('renders the toast with correct message and variant', () => {
     renderToast()
     expect(screen.getByText('Test message')).toBeInTheDocument()
-    expect(screen.getByRole('alert')).toHaveClass('text-primary')
+    expect(screen.getByRole('alert')).toHaveClass('bg-blue-100')
   })
 
   it('calls remove function after 4 + 0.4(animation) seconds', () => {
@@ -78,7 +78,7 @@ describe('Toast', () => {
 
   it('applies correct variant classes', () => {
     renderToast({ variant: 'success' })
-    expect(screen.getByRole('alert')).toHaveClass('text-green-500')
+    expect(screen.getByRole('alert')).toHaveClass('bg-green-100')
   })
 
   it('renders correct icon and class for each variant', () => {
