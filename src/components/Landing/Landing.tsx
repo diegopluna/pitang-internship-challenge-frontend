@@ -5,7 +5,7 @@ import { Button } from '../ui/button'
 
 const Landing = () => {
   return (
-    <section className="w-full pt-12 md:pt-24 lg:pt-32 xl:pt-48 items-center flex justify-center">
+    <section className="w-full pt-12 md:pt-24 lg:pt-32 flex justify-center">
       <div className="container grid gap-10 px-4 md:px-6 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col justify-center space-y-6">
           <div className="space-y-4">
