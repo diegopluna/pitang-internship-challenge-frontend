@@ -5,14 +5,14 @@ import { AlertTriangle, Check, Info, X, XCircle } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 export const toastVariants = cva(
-  'flex items-center border bg-background shadow-md p-4 relative w-80 overflow-hidden animate-slide-in',
+  'flex items-center rounded-md shadow p-4 relative w-80 overflow-hidden animate-slide-in',
   {
     variants: {
       variant: {
-        info: 'text-primary',
-        success: 'text-green-500',
-        warning: 'text-yellow-500',
-        destructive: 'text-destructive',
+        info: 'bg-blue-100',
+        success: 'bg-green-100',
+        warning: 'bg-yellow-100',
+        destructive: 'bg-red-100',
       },
     },
     defaultVariants: {
@@ -22,10 +22,10 @@ export const toastVariants = cva(
 )
 
 const toastIcons = {
-  info: <Info data-testid="info-icon" />,
-  success: <Check data-testid="success-icon" />,
-  warning: <AlertTriangle data-testid="warning-icon" />,
-  destructive: <XCircle data-testid="destructive-icon" />,
+  info: <Info className="size-5" data-testid="info-icon" />,
+  success: <Check className="size-5" data-testid="success-icon" />,
+  warning: <AlertTriangle className="size-5" data-testid="warning-icon" />,
+  destructive: <XCircle className="size-5" data-testid="destructive-icon" />,
 }
 
 export interface ToastProps {
@@ -86,13 +86,65 @@ const Toast = ({ id, message, variant }: ToastProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <span className="mr-2">{Icon}</span>
-      <p className="text-foreground">{message}</p>
+      <div
+        className={cn(
+          'text-white p-2 rounded-md mr-4',
+          variant === 'success' ? 'bg-green-500' : '',
+          variant === 'warning' ? 'bg-yellow-500' : '',
+          variant === 'destructive' ? 'bg-red-500' : '',
+          variant === 'info' ? 'bg-blue-500' : '',
+        )}
+      >
+        {Icon}
+      </div>
+      <div className="flex-1">
+        <h3
+          className={cn(
+            'font-medium',
+            variant === 'success' ? 'text-green-600' : '',
+            variant === 'warning' ? 'text-yellow-600' : '',
+            variant === 'destructive' ? 'text-red-600' : '',
+            variant === 'info' ? 'text-blue-600' : '',
+          )}
+        >
+          {(() => {
+            switch (variant) {
+              case 'success':
+                return 'Sucesso'
+              case 'warning':
+                return 'Atenção'
+              case 'destructive':
+                return 'Erro'
+              case 'info':
+                return 'Informação'
+              default:
+                return ''
+            }
+          })()}
+        </h3>
+        <p
+          className={cn(
+            'text-foreground',
+            variant === 'destructive' ? 'text-red-800' : '',
+            variant === 'warning' ? 'text-yellow-800' : '',
+            variant === 'success' ? 'text-green-800' : '',
+            variant === 'info' ? 'text-blue-800' : '',
+          )}
+        >
+          {message}
+        </p>
+      </div>
       <button
-        className="cursor-pointer border-none bg-none ml-auto text-foreground/20 hover:text-foreground"
+        className={cn(
+          'focus:outline-none',
+          variant === 'destructive' ? 'text-red-600 hover:text-red-800' : '',
+          variant === 'warning' ? 'text-yellow-600 hover:text-yellow-800' : '',
+          variant === 'success' ? 'text-green-600 hover:text-green-800' : '',
+          variant === 'info' ? 'text-blue-600 hover:text-blue-800' : '',
+        )}
         onClick={handleDismiss}
       >
-        <X />
+        <X className="size-5" />
       </button>
       <div className="absolute bottom-0 left-0 w-full h-1 bg-background/10">
         <div
