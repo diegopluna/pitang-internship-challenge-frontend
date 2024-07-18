@@ -8,8 +8,9 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
-import { Loader2 } from 'lucide-react'
+import { ArrowLeft, Loader2 } from 'lucide-react'
 import { FieldValues, SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 interface FormLayoutProps<T> {
   title: string
@@ -32,8 +33,14 @@ const FormLayout = <T,>({
   submitMessage,
   children,
 }: FormLayoutProps<T>) => {
+  const navigate = useNavigate()
+
   return (
     <Card className="max-w-md mx-auto p-6 sm:p-8">
+      <Button variant="ghost" onClick={() => navigate(-1)}>
+        <ArrowLeft className="size-4 mr-2" />
+        Voltar
+      </Button>
       <CardHeader>
         <CardTitle className="text-2xl font-bold">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
