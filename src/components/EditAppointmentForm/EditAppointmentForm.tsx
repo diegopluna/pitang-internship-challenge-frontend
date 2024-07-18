@@ -15,7 +15,7 @@ import {
   getMaxTime,
   getMinDate,
   getMinTime,
-} from '@/utils/date-utils'
+} from '@/utils/dateUtils'
 import { Switch } from '../ui/switch'
 
 const EditAppointmentForm = ({ appointment }: { appointment: Appointment }) => {

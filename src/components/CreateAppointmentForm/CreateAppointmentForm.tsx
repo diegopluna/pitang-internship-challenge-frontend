@@ -13,7 +13,7 @@ import {
   getMinTime,
   getMaxTime,
   filterAppointmentTime,
-} from '@/utils/date-utils'
+} from '@/utils/dateUtils'
 import FormLayout from '@/layouts/FormLayout'
 
 const CreateAppointmentForm = () => {
