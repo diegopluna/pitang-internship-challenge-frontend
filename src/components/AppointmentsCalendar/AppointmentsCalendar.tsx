@@ -14,7 +14,7 @@ import { Loader2 } from 'lucide-react'
 import { useMemo } from 'react'
 import CustomDatePicker from '../CustomDatePicker'
 
-const AppointmentsList = ({
+const AppointmentsCalendar = ({
   appointments,
 }: {
   appointments: Appointment[]
@@ -172,7 +172,7 @@ const AppointmentsList = ({
   )
 }
 
-AppointmentsList.Skeleton = () => {
+AppointmentsCalendar.Skeleton = () => {
   return (
     <div className="flex min-h-[calc(100vh+8.1rem)] md:min-h-0 md:h-[calc(100vh-8.1rem)] flex-col md:flex-row md:flex-1 w-full">
       <div className="bg-muted text-muted-foreground p-4 border-b md:border-b-0 md:border-r md:p-6 md:w-80">
@@ -203,4 +203,4 @@ AppointmentsList.Skeleton = () => {
   )
 }
 
-export default AppointmentsList
+export default AppointmentsCalendar

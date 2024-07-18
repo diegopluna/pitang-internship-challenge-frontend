@@ -1,10 +1,10 @@
 import { render, screen } from '@/utils/customRender'
 import { describe, it, expect } from 'vitest'
-import AppointmentsList from './AppointmentsList'
+import AppointmentsCalendar from './AppointmentsCalendar'
 import { Appointment } from '@/@types/appointment'
 import { faker } from '@faker-js/faker'
 
-describe('<AppointmentsList />', () => {
+describe('<AppointmentsCalendar />', () => {
   const mockAppointments: Appointment[] = [
     {
       id: faker.string.uuid(),
@@ -23,7 +23,7 @@ describe('<AppointmentsList />', () => {
   ]
 
   it('should render the calendar and appointments list', () => {
-    render(<AppointmentsList appointments={mockAppointments} />)
+    render(<AppointmentsCalendar appointments={mockAppointments} />)
 
     expect(screen.getByText('Calendário')).toBeInTheDocument()
     expect(
@@ -34,7 +34,7 @@ describe('<AppointmentsList />', () => {
 
   it('displays "Nenhum agendamento encontrado" when there are no appointments for the selected date', () => {
     const emptyAppointments: Appointment[] = []
-    render(<AppointmentsList appointments={emptyAppointments} />)
+    render(<AppointmentsCalendar appointments={emptyAppointments} />)
 
     expect(
       screen.getByText('Nenhum agendamento encontrado'),
@@ -42,7 +42,7 @@ describe('<AppointmentsList />', () => {
   })
 
   it('renders the correct variant for vaccination status', () => {
-    render(<AppointmentsList appointments={mockAppointments} />)
+    render(<AppointmentsCalendar appointments={mockAppointments} />)
 
     const notVaccinatedBadge = screen.getByText('Não vacinado')
     const vaccinatedBadge = screen.getByText('Vacinado')
@@ -52,7 +52,7 @@ describe('<AppointmentsList />', () => {
   })
 
   it('renders the Skeleton component when in loading state', () => {
-    render(<AppointmentsList.Skeleton />)
+    render(<AppointmentsCalendar.Skeleton />)
 
     const skeletonElements = screen.getAllByTestId('skeleton')
     expect(skeletonElements.length).toBeGreaterThan(0)

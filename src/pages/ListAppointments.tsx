@@ -4,7 +4,7 @@ import ErrorState from '@/components/ErrorState'
 import { useGetAppointments } from '@/hooks/use-get-appointments'
 import ListLayout from '@/layouts/ListLayout'
 import { useQueryClient } from '@tanstack/react-query'
-import AppointmentsList from '@/components/AppointmentsList'
+import AppointmentsCalendar from '@/components/AppointmentsCalendar'
 import useLocalStorage from '@/hooks/use-local-storage'
 import { LIST_APPOINTMENTS_VIEW_KEY } from '@/constants'
 import { Button } from '@/components/ui/button'
@@ -43,7 +43,7 @@ const ListAppointments = () => {
 
   if (isLoading)
     return view === 'calendar' ? (
-      <AppointmentsList.Skeleton />
+      <AppointmentsCalendar.Skeleton />
     ) : (
       <ListLayout
         title="Agendamentos de Vacinação"
@@ -66,7 +66,7 @@ const ListAppointments = () => {
   return view === 'calendar' ? (
     <>
       {tabButton}
-      <AppointmentsList appointments={sortedData} />
+      <AppointmentsCalendar appointments={sortedData} />
     </>
   ) : (
     <>
