@@ -9,7 +9,7 @@ describe('<AppointmentsList />', () => {
     {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
-      birthDay: new Date('1990-01-01'),
+      birthDay: faker.date.birthdate(),
       appointmentDate: new Date(),
       vaccinationComplete: false,
     },
@@ -17,7 +17,7 @@ describe('<AppointmentsList />', () => {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
       birthDay: faker.date.birthdate(),
-      appointmentDate: faker.date.soon(),
+      appointmentDate: new Date(),
       vaccinationComplete: true,
     },
   ]
