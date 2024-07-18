@@ -24,7 +24,7 @@ const ListAppointments = () => {
   }
 
   const tabButton = (
-    <div className="flex flex-col-reverse gap-y-3 z-[9999] fixed">
+    <div className="flex flex-col-reverse gap-y-3 z-[8000] fixed">
       <div className="relative">
         <Button
           variant="default"
