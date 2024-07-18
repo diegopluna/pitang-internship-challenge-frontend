@@ -36,7 +36,7 @@ const Landing = () => {
             className="mx-auto aspect-square w-full object-cover object-center"
           />
           <p className="text-xs text-muted-foreground mt-2">
-            Designed by{' '}
+            Imagem por{' '}
             <a href={FREEPIK_URL} target="_blank" className="hover:underline">
               Freepik
             </a>
