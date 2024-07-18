@@ -106,12 +106,12 @@ const AppointmentsList = ({
           </div>
         </div>
       </div>
-      <div className="flex-1 p-4 flex flex-col md:p-6 overflow-y-auto">
+      <div className="flex-1 p-4 flex flex-col md:p-6 overflow-y-auto md:overflow-y-hidden">
         <h2 className="text-lg font-semibold mb-4 md:text-xl">
           Agendamentos para {format(selectedDate, 'dd/MM/yyyy')}
         </h2>
         <Separator className="my-4" />
-        <ScrollArea className="flex-1 max-h-full overflow-y-auto">
+        <ScrollArea className="flex-1 max-h-full">
           <div className="grid grid-cols-1 gap-4">
             {Object.entries(
               groupedAppointments[formattedSelectedDate] || {},
