@@ -83,16 +83,18 @@ const AppointmentsList = ({
   ]
 
   return (
-    <div className="flex h-[calc(100vh-8.1rem)] w-full">
-      <div className="p-6 border-r bg-muted text-muted-foreground">
-        <h2 className="text-lg font-semibold mb-4">Calendário</h2>
-        <DatePicker
-          locale="pt-BR"
-          highlightDates={highlightedDays}
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date as Date)}
-          inline
-        />
+    <div className="flex h-[calc(100vh-8.1rem)] flex-col md:flex-row md:flex-1 w-full">
+      <div className="bg-muted text-muted-foreground p-4 border-b md:border-b-0 md:border-r md:p-6">
+        <h2 className="text-lg font-semibold mb-4 md:text-xl">Calendário</h2>
+        <div className="flex items-center justify-center">
+          <DatePicker
+            locale="pt-BR"
+            highlightDates={highlightedDays}
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date as Date)}
+            inline
+          />
+        </div>
         <div className="mt-4 space-y-2">
           <div className="text-sm text-muted-foreground">
             <span className="bg-yellow-100 w-3 h-3 inline-block rounded-full mr-2" />
@@ -104,12 +106,12 @@ const AppointmentsList = ({
           </div>
         </div>
       </div>
-      <div className="flex-1  p-6 flex flex-col ">
-        <h2 className="text-xl font-semibold mb-4">
+      <div className="flex-1 p-4 flex flex-col md:p-6 overflow-y-auto">
+        <h2 className="text-lg font-semibold mb-4 md:text-xl">
           Agendamentos para {format(selectedDate, 'dd/MM/yyyy')}
         </h2>
         <Separator className="my-4" />
-        <ScrollArea className="flex-1">
+        <ScrollArea className="flex-1 max-h-full overflow-y-auto">
           <div className="grid grid-cols-1 gap-4">
             {Object.entries(
               groupedAppointments[formattedSelectedDate] || {},
@@ -127,7 +129,7 @@ const AppointmentsList = ({
                               <ActionsDropdown appointment={appointment} />
                             </div>
                             <div className="text-sm">
-                              Data de aniversário:{' '}
+                              Aniversário:{' '}
                               {format(appointment.birthDay, 'dd/MM/yyyy')}
                             </div>
                             <Badge
