@@ -10,10 +10,12 @@ import { Appointment } from '@/@types/appointment'
 import { Button } from '@/components/ui/button'
 import { MoreHorizontal } from 'lucide-react'
 import { useToggleVaccinated } from '@/hooks/use-toggle-vaccinated'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const ActionsDropdown = ({ appointment }: { appointment: Appointment }) => {
   const mutation = useToggleVaccinated()
+  const navigate = useNavigate()
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -32,8 +34,10 @@ const ActionsDropdown = ({ appointment }: { appointment: Appointment }) => {
           Marcar como{' '}
           {!appointment.vaccinationComplete ? 'vacinado' : 'não vacinado'}
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link to={`/agendamentos/${appointment.id}/editar`}>Editar</Link>
+        <DropdownMenuItem
+          onClick={() => navigate(`/agendamentos/${appointment.id}/editar`)}
+        >
+          Editar
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
