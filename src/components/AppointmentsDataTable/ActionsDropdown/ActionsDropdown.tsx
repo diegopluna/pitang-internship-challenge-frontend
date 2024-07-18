@@ -13,7 +13,7 @@ import { useToggleVaccinated } from '@/hooks/use-toggle-vaccinated'
 import { Link } from 'react-router-dom'
 
 const ActionsDropdown = ({ appointment }: { appointment: Appointment }) => {
-  const { toggleVaccinated, isLoading } = useToggleVaccinated()
+  const mutation = useToggleVaccinated()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,8 +26,8 @@ const ActionsDropdown = ({ appointment }: { appointment: Appointment }) => {
         <DropdownMenuLabel>Ações</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => toggleVaccinated(appointment.id)}
-          disabled={isLoading}
+          onClick={() => mutation.mutate(appointment.id)}
+          disabled={mutation.isPending}
         >
           Marcar como{' '}
           {!appointment.vaccinationComplete ? 'vacinado' : 'não vacinado'}
