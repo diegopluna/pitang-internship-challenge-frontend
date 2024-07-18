@@ -6,6 +6,7 @@ import ActionsDropdown from '../AppointmentsDataTable/ActionsDropdown'
 import { cn } from '@/utils/cn'
 import { Badge } from '../ui/badge'
 import { HighlightDate } from 'react-datepicker/dist/date_utils'
+import { registerLocale } from 'react-datepicker'
 import useLocalStorage from '@/hooks/use-local-storage'
 import { LIST_APPOINTMENTS_CALENDAR_KEY } from '@/constants'
 import { ScrollArea } from '../ui/scroll-area'
@@ -13,6 +14,8 @@ import { Separator } from '../ui/separator'
 import { Skeleton } from '../ui/skeleton'
 import { Loader2 } from 'lucide-react'
 import { ptBR } from 'date-fns/locale'
+
+registerLocale('pt-BR', ptBR)
 
 type GroupedAppointments = {
   [date: string]: {
@@ -120,9 +123,9 @@ const AppointmentsList = ({
             {Object.entries(
               groupedAppointments[formattedSelectedDate] || {},
             ).map(([hour, appointments]) => (
-              <>
+              <div key={hour}>
                 <div className="font-semibold text-xl ">{hour}</div>
-                <div key={hour} className=" rounded-md p-4">
+                <div className=" rounded-md p-4">
                   <div className="flex items-center justify-start">
                     <div className="flex items-center gap-2">
                       {appointments.map((appointment, index) => (
@@ -158,7 +161,7 @@ const AppointmentsList = ({
                   </div>
                 </div>
                 <Separator className="my-4" />
-              </>
+              </div>
             ))}
           </div>
         </ScrollArea>
@@ -177,9 +180,9 @@ const AppointmentsList = ({
 
 AppointmentsList.Skeleton = () => {
   return (
-    <div className="flex h-[calc(100vh-8.1rem)] w-full">
-      <div className="w-80 p-6 border-r bg-muted text-muted-foreground">
-        <h2 className="text-lg font-semibold mb-4">Calendário</h2>
+    <div className="flex min-h-[calc(100vh+8.1rem)] md:min-h-0 md:h-[calc(100vh-8.1rem)] flex-col md:flex-row md:flex-1 w-full">
+      <div className="bg-muted text-muted-foreground p-4 border-b md:border-b-0 md:border-r md:p-6 md:w-80">
+        <h2 className="text-lg font-semibold mb-4 md:text-xl">Calendário</h2>
         <Skeleton
           className="h-60 bg-background w-full"
           data-testid="skeleton"
