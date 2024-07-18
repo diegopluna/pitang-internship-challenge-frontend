@@ -1,8 +1,9 @@
-import { render, screen } from '@/utils/customRender'
 import { describe, it, expect } from 'vitest'
-import AppointmentsCalendar from './AppointmentsCalendar'
-import { Appointment } from '@/@types/appointment'
 import { faker } from '@faker-js/faker'
+
+import { Appointment } from '@/@types/appointment'
+import { render, screen } from '@/utils/customRender'
+import AppointmentsCalendar from '@/components/AppointmentsCalendar'
 
 describe('<AppointmentsCalendar />', () => {
   const mockAppointments: Appointment[] = [

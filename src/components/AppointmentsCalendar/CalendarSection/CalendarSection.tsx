@@ -1,6 +1,7 @@
+import { HighlightDate } from 'react-datepicker/dist/date_utils'
+
 import CustomDatePicker from '@/components/CustomDatePicker'
 import { Skeleton } from '@/components/ui/skeleton'
-import { HighlightDate } from 'react-datepicker/dist/date_utils'
 
 interface CalendarSectionProps {
   selectedDate: Date

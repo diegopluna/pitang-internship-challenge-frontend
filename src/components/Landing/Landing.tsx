@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import landingImage from '@/assets/images/landing.svg'
+
 import { FREEPIK_URL } from '@/constants'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
+import landingImage from '@/assets/images/landing.svg'
 
 const Landing = () => {
   return (

@@ -1,8 +1,9 @@
-import { Appointment } from '@/@types/appointment'
-import { Separator } from '../ui/separator'
-import { Skeleton } from '../ui/skeleton'
 import { Loader2 } from 'lucide-react'
+
+import { Appointment } from '@/@types/appointment'
 import useAppointmentData from '@/hooks/use-appointment-data'
+import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
 import CalendarSection from './CalendarSection'
 import ListSection from './ListSection'
 

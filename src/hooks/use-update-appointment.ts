@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
+
 import api, { handleApiError } from '@/utils/api'
 import { Appointment } from '@/@types/appointment'
 

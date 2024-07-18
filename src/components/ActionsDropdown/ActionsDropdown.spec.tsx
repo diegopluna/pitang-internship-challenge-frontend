@@ -1,8 +1,9 @@
-import { render, screen } from '@/utils/customRender'
-import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi } from 'vitest'
-import ActionsDropdown from './ActionsDropdown'
 import { faker } from '@faker-js/faker'
+import userEvent from '@testing-library/user-event'
+
+import { render, screen } from '@/utils/customRender'
+import ActionsDropdown from '@/components/ActionsDropdown'
 
 vi.mock('react-router-dom', () => ({
   ...vi.importActual('react-router-dom'),

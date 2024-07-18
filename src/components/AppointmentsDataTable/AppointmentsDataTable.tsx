@@ -13,7 +13,6 @@ import {
 } from '@tanstack/react-table'
 
 import { Table, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-
 import { Skeleton } from '@/components/ui/skeleton'
 import TableFilters from './TableFilters'
 import TableBodyComponent from './TableBody'
@@ -24,7 +23,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
-export function DataTable<TData, TValue>({
+export default function AppointmentsDataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -79,7 +78,7 @@ export function DataTable<TData, TValue>({
   )
 }
 
-DataTable.Skeleton = () => {
+AppointmentsDataTable.Skeleton = () => {
   return (
     <div>
       <div className="rounded-md border">

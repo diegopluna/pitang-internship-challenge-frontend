@@ -1,9 +1,10 @@
+import { format } from 'date-fns'
+
 import { Appointment } from '@/@types/appointment'
-import ActionsDropdown from '@/components/ActionsDropdown'
+import { cn } from '@/utils/cn'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
-import { cn } from '@/utils/cn'
-import { format } from 'date-fns'
+import ActionsDropdown from '@/components/ActionsDropdown'
 
 interface AppointmentCardProps {
   appointment: Appointment

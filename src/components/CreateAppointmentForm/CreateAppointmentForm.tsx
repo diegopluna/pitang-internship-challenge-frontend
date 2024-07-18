@@ -1,11 +1,3 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import { useCreateAppointmentForm } from '@/hooks/use-create-appointment-form'
 import {
   getMinDate,
@@ -14,7 +6,15 @@ import {
   filterAppointmentTime,
 } from '@/utils/dateUtils'
 import FormLayout from '@/layouts/FormLayout'
-import CustomDatePicker from '../CustomDatePicker'
+import CustomDatePicker from '@/components/CustomDatePicker'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 const CreateAppointmentForm = () => {
   const { form, onSubmit, isLoading } = useCreateAppointmentForm()

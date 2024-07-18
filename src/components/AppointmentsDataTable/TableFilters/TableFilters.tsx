@@ -1,4 +1,6 @@
 import { Table } from '@tanstack/react-table'
+
+import CustomDatePicker from '@/components/CustomDatePicker'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -7,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import CustomDatePicker from '@/components/CustomDatePicker'
 
 interface TableFiltersProps<TData> {
   table: Table<TData>

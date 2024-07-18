@@ -1,8 +1,8 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import Toast, { toastVariants } from './Toast'
-import { ToastProps } from './Toast'
+import { render, screen, fireEvent, act } from '@testing-library/react'
+
 import { ToastContext, ToastContextType } from '@/contexts/ToastContext'
+import Toast, { toastVariants, ToastProps } from './Toast'
 
 describe('<Toast />', () => {
   const mockRemove = vi.fn()

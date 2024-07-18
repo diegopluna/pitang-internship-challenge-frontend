@@ -1,5 +1,6 @@
-import api from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
+
+import api from "@/utils/api";
 import { AppointmentResponse, Appointment } from "@/@types/appointment";
 
 export const useGetAppointment = (id: string) => {

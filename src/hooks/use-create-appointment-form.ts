@@ -1,11 +1,12 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { usePersistedForm } from '@/hooks/use-persisted-form'
-import { APPOINTMENT_FORM_STORAGE_KEY } from '@/constants'
-import { useCreateAppointment } from '@/hooks/use-create-appointment'
-import { useModal } from '@/contexts/ModalContext'
-import { AppError } from '@/utils/api'
 import { useCallback } from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { APPOINTMENT_FORM_STORAGE_KEY } from '@/constants'
+import { AppError } from '@/utils/api'
+import { usePersistedForm } from '@/hooks/use-persisted-form'
+import { useModal } from '@/contexts/ModalContext'
+import { useCreateAppointment } from '@/hooks/use-create-appointment'
 
 const formSchema = z.object({
   name: z.string().trim().min(1, {

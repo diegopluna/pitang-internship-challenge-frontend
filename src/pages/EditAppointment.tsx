@@ -1,10 +1,11 @@
+import { useParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
+
+import { useGetAppointment } from '@/hooks/use-get-appointment'
 import EditAppointmentForm from '@/components/EditAppointmentForm'
 import ErrorState from '@/components/ErrorState'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useGetAppointment } from '@/hooks/use-get-appointment'
-import { useQueryClient } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
 
 const EditAppointment = () => {
   const { id } = useParams()

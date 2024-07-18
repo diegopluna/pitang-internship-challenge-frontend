@@ -1,5 +1,6 @@
-import { render, screen } from '@/utils/customRender'
 import { describe, it, expect } from 'vitest'
+import { render, screen } from '@/utils/customRender'
+
 import Landing from './Landing'
 
 describe('<Landing />', () => {

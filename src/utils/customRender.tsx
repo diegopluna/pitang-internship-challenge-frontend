@@ -1,8 +1,9 @@
-import { ModalProvider } from '@/contexts/ModalContext'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, RenderOptions } from '@testing-library/react'
 import { ReactElement } from 'react'
+import { render, RenderOptions } from '@testing-library/react'
 import { MemoryRouter, MemoryRouterProps } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+import { ModalProvider } from '@/contexts/ModalContext'
 
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   routerProps?: MemoryRouterProps

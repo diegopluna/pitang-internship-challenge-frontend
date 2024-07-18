@@ -1,10 +1,11 @@
+import { format } from 'date-fns'
+import { Loader2 } from 'lucide-react'
+
 import { GroupedAppointments } from '@/@types/appointment'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import { format } from 'date-fns'
-import { Loader2 } from 'lucide-react'
-import AppointmentCard from '../AppointmentCard/'
+import AppointmentCard from '@/components/AppointmentsCalendar/AppointmentCard'
 
 interface ListSectionProps {
   selectedDate: Date

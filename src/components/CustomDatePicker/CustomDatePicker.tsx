@@ -1,18 +1,19 @@
 import { forwardRef } from 'react'
-import DatePicker, { DatePickerProps, registerLocale } from 'react-datepicker'
-import { Button } from '../ui/button'
-import { cn } from '@/utils/cn'
-import { CalendarIcon, ChevronLeft, ChevronRight, Clock, X } from 'lucide-react'
 import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { CalendarIcon, ChevronLeft, ChevronRight, Clock, X } from 'lucide-react'
+import DatePicker, { DatePickerProps, registerLocale } from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
+import { cn } from '@/utils/cn'
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select'
-import { ptBR } from 'date-fns/locale'
-import 'react-datepicker/dist/react-datepicker.css'
+} from '@/components/ui/select'
 import './CustomDatePicker.css'
 
 registerLocale('pt-BR', ptBR)

@@ -1,8 +1,9 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import CreateAppointmentForm from './CreateAppointmentForm'
+
 import { ModalProvider } from '@/contexts/ModalContext'
+import CreateAppointmentForm from './CreateAppointmentForm'
 
 vi.mock('@/utils/api', () => ({
   default: {

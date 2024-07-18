@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import { format } from 'date-fns'
+import { HighlightDate } from 'react-datepicker/dist/date_utils'
+
+import { LIST_APPOINTMENTS_CALENDAR_KEY } from '@/constants'
 import { Appointment, GroupedAppointments } from '@/@types/appointment'
 import useLocalStorage from '@/hooks/use-local-storage'
-import { LIST_APPOINTMENTS_CALENDAR_KEY } from '@/constants'
-import { HighlightDate } from 'react-datepicker/dist/date_utils'
 
 const useAppointmentData = (appointments: Appointment[]) => {
   const [selectedDate, setSelectedDate] = useLocalStorage(

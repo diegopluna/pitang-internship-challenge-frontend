@@ -1,7 +1,8 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import FormLayout from './FormLayout'
 import { useForm } from 'react-hook-form'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+
+import FormLayout from './FormLayout'
 
 vi.mock('react-router-dom', () => ({
   ...vi.importActual('react-router-dom'),

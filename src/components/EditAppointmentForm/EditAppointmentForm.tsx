@@ -1,5 +1,5 @@
-import { useUpdateAppointmentForm } from '@/hooks/use-update-appointment-form'
 import { Appointment } from '@/@types/appointment'
+import { useUpdateAppointmentForm } from '@/hooks/use-update-appointment-form'
 import FormLayout from '@/layouts/FormLayout'
 import {
   FormControl,
@@ -7,16 +7,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form'
-import { Input } from '../ui/input'
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   filterAppointmentTime,
   getMaxTime,
   getMinDate,
   getMinTime,
 } from '@/utils/dateUtils'
-import { Switch } from '../ui/switch'
-import CustomDatePicker from '../CustomDatePicker'
+import { Switch } from '@/components/ui/switch'
+import CustomDatePicker from '@/components/CustomDatePicker'
 
 const EditAppointmentForm = ({ appointment }: { appointment: Appointment }) => {
   const { form, onSubmit, isLoading } = useUpdateAppointmentForm(appointment)

@@ -1,7 +1,8 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
-import Modal from './Modal'
-import { ModalProvider, useModal } from '@/contexts/ModalContext'
 import { expect, describe, it, vi } from 'vitest'
+import { render, screen, fireEvent, act } from '@testing-library/react'
+
+import { ModalProvider, useModal } from '@/contexts/ModalContext'
+import Modal from './Modal'
 
 vi.mock('react-router-dom', () => ({
   ...vi.importActual('react-router-dom'),

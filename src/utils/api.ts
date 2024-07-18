@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+
 import env from "./env";
 
 const api = axios.create({

@@ -1,3 +1,8 @@
+import { MoreHorizontal } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+
+import { Appointment } from '@/@types/appointment'
+import { useToggleVaccinated } from '@/hooks/use-toggle-vaccinated'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,13 +11,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Appointment } from '@/@types/appointment'
 import { Button } from '@/components/ui/button'
-import { MoreHorizontal } from 'lucide-react'
-import { useToggleVaccinated } from '@/hooks/use-toggle-vaccinated'
-import { useNavigate } from 'react-router-dom'
 
-const ActionsDropdown = ({ appointment }: { appointment: Appointment }) => {
+interface ActionsDropdownProps {
+  appointment: Appointment
+}
+
+const ActionsDropdown = ({ appointment }: ActionsDropdownProps) => {
   const mutation = useToggleVaccinated()
   const navigate = useNavigate()
 

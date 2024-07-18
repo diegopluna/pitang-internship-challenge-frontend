@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 import BaseLayout from './layouts/BaseLayout'
 import Home from './pages/Home'
 import Schedule from './pages/Schedule'

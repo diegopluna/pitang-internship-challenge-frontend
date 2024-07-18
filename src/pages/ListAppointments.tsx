@@ -1,14 +1,15 @@
-import { columns } from '@/components/AppointmentsDataTable/columns'
-import { DataTable } from '@/components/AppointmentsDataTable/AppointmentsDataTable'
-import ErrorState from '@/components/ErrorState'
-import { useGetAppointments } from '@/hooks/use-get-appointments'
-import ListLayout from '@/layouts/ListLayout'
-import { useQueryClient } from '@tanstack/react-query'
-import AppointmentsCalendar from '@/components/AppointmentsCalendar'
-import useLocalStorage from '@/hooks/use-local-storage'
-import { LIST_APPOINTMENTS_VIEW_KEY } from '@/constants'
-import { Button } from '@/components/ui/button'
 import { Calendar, Table } from 'lucide-react'
+import { useQueryClient } from '@tanstack/react-query'
+
+import { LIST_APPOINTMENTS_VIEW_KEY } from '@/constants'
+import { useGetAppointments } from '@/hooks/use-get-appointments'
+import useLocalStorage from '@/hooks/use-local-storage'
+import ErrorState from '@/components/ErrorState'
+import ListLayout from '@/layouts/ListLayout'
+import { columns } from '@/components/AppointmentsDataTable/columns'
+import AppointmentsDataTable from '@/components/AppointmentsDataTable'
+import AppointmentsCalendar from '@/components/AppointmentsCalendar'
+import { Button } from '@/components/ui/button'
 
 const ListAppointments = () => {
   const [view, setView] = useLocalStorage<'table' | 'calendar'>(
@@ -49,7 +50,7 @@ const ListAppointments = () => {
         title="Agendamentos de Vacinação"
         description="Carregando seus agendamentos de vacinação..."
       >
-        <DataTable.Skeleton />
+        <AppointmentsDataTable.Skeleton />
       </ListLayout>
     )
 
@@ -75,7 +76,7 @@ const ListAppointments = () => {
         title="Agendamentos de Vacinação"
         description="Gerencie e visualize seus agendamentos de vacinação."
       >
-        <DataTable data={sortedData} columns={columns} />
+        <AppointmentsDataTable data={sortedData} columns={columns} />
       </ListLayout>
     </>
   )
