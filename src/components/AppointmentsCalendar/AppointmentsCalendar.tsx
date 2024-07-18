@@ -1,85 +1,28 @@
-import { Appointment, GroupedAppointments } from '@/@types/appointment'
+import { Appointment } from '@/@types/appointment'
 import { format } from 'date-fns'
 import { Card } from '../ui/card'
 import ActionsDropdown from '../ActionsDropdown'
 import { cn } from '@/utils/cn'
 import { Badge } from '../ui/badge'
-import { HighlightDate } from 'react-datepicker/dist/date_utils'
-import useLocalStorage from '@/hooks/use-local-storage'
-import { LIST_APPOINTMENTS_CALENDAR_KEY } from '@/constants'
 import { ScrollArea } from '../ui/scroll-area'
 import { Separator } from '../ui/separator'
 import { Skeleton } from '../ui/skeleton'
 import { Loader2 } from 'lucide-react'
-import { useMemo } from 'react'
 import CustomDatePicker from '../CustomDatePicker'
+import useAppointmentData from '@/hooks/use-appointment-data'
 
 const AppointmentsCalendar = ({
   appointments,
 }: {
   appointments: Appointment[]
 }) => {
-  const [selectedDate, setSelectedDate] = useLocalStorage(
-    LIST_APPOINTMENTS_CALENDAR_KEY,
-    new Date(),
-  )
-
-  const formattedSelectedDate = format(selectedDate, 'dd/MM/yyyy')
-
-  const groupedAppointments = useMemo(
-    () =>
-      appointments!.reduce((acc, appointment) => {
-        const date = new Date(appointment.appointmentDate)
-        const dateKey = format(date, 'dd/MM/yyyy')
-        const hourKey = format(date, 'HH:mm')
-
-        if (!acc[dateKey]) {
-          acc[dateKey] = {}
-        }
-
-        if (!acc[dateKey][hourKey]) {
-          acc[dateKey][hourKey] = []
-        }
-
-        acc[dateKey][hourKey].push(appointment)
-
-        return acc
-      }, {} as GroupedAppointments),
-    [appointments],
-  )
-
-  const appointmentDates = appointments.map(
-    (appointment) => new Date(appointment.appointmentDate),
-  )
-
-  const dateOccurrences = appointmentDates.reduce(
-    (acc, date) => {
-      const dateKey = format(date, 'yyyy-MM-dd')
-      acc[dateKey] = (acc[dateKey] || 0) + 1
-      return acc
-    },
-    {} as Record<string, number>,
-  )
-
-  const notFullDays: Date[] = []
-  const fullDays: Date[] = []
-
-  Object.entries(dateOccurrences).forEach(([date, count]) => {
-    if (count === 20) {
-      fullDays.push(new Date(date + 'T00:00:00'))
-    } else if (count > 0 && count < 20) {
-      notFullDays.push(new Date(date + 'T00:00:00'))
-    }
-  })
-
-  const highlightedDays: HighlightDate[] = [
-    {
-      'react-datepicker__day--highlighted-full': fullDays,
-    },
-    {
-      'react-datepicker__day--highlighted-not-full': notFullDays,
-    },
-  ]
+  const {
+    selectedDate,
+    formattedSelectedDate,
+    setSelectedDate,
+    groupedAppointments,
+    highlightedDays,
+  } = useAppointmentData(appointments)
 
   return (
     <div className="flex min-h-[calc(100vh+8.1rem)] md:min-h-0 md:h-[calc(100vh-8.1rem)] flex-col md:flex-row md:flex-1 w-full">
