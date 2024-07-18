@@ -14,6 +14,7 @@ import { Separator } from '../ui/separator'
 import { Skeleton } from '../ui/skeleton'
 import { Loader2 } from 'lucide-react'
 import { ptBR } from 'date-fns/locale'
+import { useMemo } from 'react'
 
 registerLocale('pt-BR', ptBR)
 
@@ -35,23 +36,27 @@ const AppointmentsList = ({
 
   const formattedSelectedDate = format(selectedDate, 'dd/MM/yyyy')
 
-  const groupedAppointments = appointments!.reduce((acc, appointment) => {
-    const date = new Date(appointment.appointmentDate)
-    const dateKey = format(date, 'dd/MM/yyyy')
-    const hourKey = format(date, 'HH:mm')
+  const groupedAppointments = useMemo(
+    () =>
+      appointments!.reduce((acc, appointment) => {
+        const date = new Date(appointment.appointmentDate)
+        const dateKey = format(date, 'dd/MM/yyyy')
+        const hourKey = format(date, 'HH:mm')
 
-    if (!acc[dateKey]) {
-      acc[dateKey] = {}
-    }
+        if (!acc[dateKey]) {
+          acc[dateKey] = {}
+        }
 
-    if (!acc[dateKey][hourKey]) {
-      acc[dateKey][hourKey] = []
-    }
+        if (!acc[dateKey][hourKey]) {
+          acc[dateKey][hourKey] = []
+        }
 
-    acc[dateKey][hourKey].push(appointment)
+        acc[dateKey][hourKey].push(appointment)
 
-    return acc
-  }, {} as GroupedAppointments)
+        return acc
+      }, {} as GroupedAppointments),
+    [appointments],
+  )
 
   const appointmentDates = appointments.map(
     (appointment) => new Date(appointment.appointmentDate),
