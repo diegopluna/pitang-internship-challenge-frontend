@@ -8,7 +8,12 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      if (item === null) return initialValue;
+      const parsed = JSON.parse(item);
+      if (typeof parsed === 'string' && !isNaN(Date.parse(parsed))) {
+        return new Date(parsed) as T;
+      }
+      return parsed;
     } catch (error) {
       console.warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
@@ -22,7 +27,7 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        window.localStorage.setItem(key, JSON.stringify(valueToStore instanceof Date ? valueToStore.toISOString() : valueToStore));
       }
     } catch (error) {
       console.warn(`Error setting localStorage key "${key}":`, error);
