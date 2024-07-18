@@ -79,7 +79,7 @@ export function DataTable<TData, TValue>({
   )
 }
 
-export function DataTableSkeleton() {
+DataTable.Skeleton = () => {
   return (
     <div>
       <div className="rounded-md border">
