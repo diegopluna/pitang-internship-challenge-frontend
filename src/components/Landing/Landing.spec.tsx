@@ -37,7 +37,7 @@ describe('<Landing />', () => {
 
   it('should show the image attribution', () => {
     render(<Landing />)
-    const attribution = screen.getByText(/Designed by/i)
+    const attribution = screen.getByText(/Imagem por/i)
     expect(attribution).toBeInTheDocument()
     const attributionLink = screen.getByRole('link', { name: /Freepik/i })
     expect(attributionLink).toHaveAttribute('href', 'https://www.freepik.com')
