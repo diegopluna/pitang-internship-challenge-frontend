@@ -2,21 +2,22 @@ import { render, screen } from '@/utils/customRender'
 import { describe, it, expect } from 'vitest'
 import AppointmentsList from './AppointmentsList'
 import { Appointment } from '@/@types/appointment'
+import { faker } from '@faker-js/faker'
 
-describe('AppointmentsList', () => {
+describe('<AppointmentsList />', () => {
   const mockAppointments: Appointment[] = [
     {
-      id: '1',
-      name: 'John Doe',
+      id: faker.string.uuid(),
+      name: faker.person.fullName(),
       birthDay: new Date('1990-01-01'),
       appointmentDate: new Date(),
       vaccinationComplete: false,
     },
     {
-      id: '2',
-      name: 'Jane Smith',
-      birthDay: new Date('1985-05-15'),
-      appointmentDate: new Date(),
+      id: faker.string.uuid(),
+      name: faker.person.fullName(),
+      birthDay: faker.date.birthdate(),
+      appointmentDate: faker.date.soon(),
       vaccinationComplete: true,
     },
   ]

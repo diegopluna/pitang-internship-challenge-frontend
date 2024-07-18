@@ -19,7 +19,7 @@ describe('<EditAppointmentForm />', () => {
     vaccinationComplete: faker.datatype.boolean(),
   }
 
-  it('should renders the form correctly with pre-filled data', () => {
+  it('should render the form correctly with pre-filled data', () => {
     const appointment = {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
@@ -44,7 +44,7 @@ describe('<EditAppointmentForm />', () => {
     ).toBeInTheDocument()
   })
 
-  it('displays error messages for invalid inputs', async () => {
+  it('should display error messages for invalid inputs', async () => {
     render(
       <ModalProvider>
         <EditAppointmentForm appointment={appointment} />

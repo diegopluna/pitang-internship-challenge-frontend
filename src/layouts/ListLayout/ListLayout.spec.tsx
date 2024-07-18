@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import ListLayout from './ListLayout'
 
-describe('ListLayout', () => {
-  it('renders the title and description correctly', () => {
+describe('<ListLayout />', () => {
+  it('should render the title and description correctly', () => {
     const title = 'Test Title'
     const description = 'Test Description'
     render(
@@ -16,7 +16,7 @@ describe('ListLayout', () => {
     expect(screen.getByText(description)).toBeInTheDocument()
   })
 
-  it('renders children content', () => {
+  it('should render children content', () => {
     const childText = 'Child content'
     render(
       <ListLayout title="Test" description="Test">

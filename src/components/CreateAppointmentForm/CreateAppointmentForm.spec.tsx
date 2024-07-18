@@ -15,12 +15,12 @@ vi.mock('react-router-dom', () => ({
   useNavigate: () => vi.fn(),
 }))
 
-describe('CreateAppointmentForm', () => {
+describe('<CreateAppointmentForm />', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
-  it('renders the form correctly', () => {
+  it('should render the form correctly', () => {
     render(
       <ModalProvider>
         <CreateAppointmentForm />
@@ -37,7 +37,7 @@ describe('CreateAppointmentForm', () => {
     expect(screen.getByRole('button', { name: 'Agendar' })).toBeInTheDocument()
   })
 
-  it('displays error messages for invalid inputs', async () => {
+  it('should display error messages for invalid inputs', async () => {
     render(
       <ModalProvider>
         <CreateAppointmentForm />

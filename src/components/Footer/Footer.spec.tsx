@@ -3,8 +3,8 @@ import Footer from './Footer'
 import { describe, it, expect } from 'vitest'
 import { COPYRIGHT_YEAR, APP_NAME } from '@/constants'
 
-describe('Footer', () => {
-  it('renders the footer with correct text and styling', () => {
+describe('<Footer />', () => {
+  it('should render the footer with correct text and styling', () => {
     render(<Footer />)
 
     const footer = screen.getByRole('contentinfo')

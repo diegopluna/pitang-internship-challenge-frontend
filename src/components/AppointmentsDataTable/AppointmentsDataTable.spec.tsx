@@ -17,8 +17,8 @@ const generateMockAppointments = (count: number) => {
   }))
 }
 
-describe('AppointmentsDataTable', () => {
-  it('renders the table with correct headers and data', () => {
+describe('<AppointmentsDataTable />', () => {
+  it('should render the table with correct headers and data', () => {
     const mockData = generateMockAppointments(5)
     render(<DataTable columns={columns} data={mockData} />)
 
@@ -49,7 +49,7 @@ describe('AppointmentsDataTable', () => {
     })
   })
 
-  it('filters the table by name', async () => {
+  it('should filter the table by name', async () => {
     const mockData = generateMockAppointments(10)
     render(<DataTable columns={columns} data={mockData} />)
 
@@ -65,7 +65,7 @@ describe('AppointmentsDataTable', () => {
     })
   })
 
-  it('sorts the table by name', async () => {
+  it('should sort the table by name', async () => {
     const user = userEvent.setup()
     const mockData = generateMockAppointments(10)
     render(<DataTable columns={columns} data={mockData} />)
@@ -130,7 +130,7 @@ describe('AppointmentsDataTable', () => {
     )
   })
 
-  it('paginates the table', async () => {
+  it('should paginate the table', async () => {
     const mockData = generateMockAppointments(15)
     render(<DataTable columns={columns} data={mockData} />)
 

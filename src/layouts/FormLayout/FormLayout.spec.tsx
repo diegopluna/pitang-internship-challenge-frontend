@@ -8,7 +8,7 @@ vi.mock('react-router-dom', () => ({
   useNavigate: vi.fn(),
 }))
 
-describe('FormLayout', () => {
+describe('<FormLayout />', () => {
   const mockOnSubmit = vi.fn()
 
   const TestComponent = () => {
@@ -28,23 +28,23 @@ describe('FormLayout', () => {
     )
   }
 
-  it('renders the form with correct title and description', () => {
+  it('should render the form with correct title and description', () => {
     render(<TestComponent />)
     expect(screen.getByText('Test Form')).toBeInTheDocument()
     expect(screen.getByText('This is a test form')).toBeInTheDocument()
   })
 
-  it('renders children components', () => {
+  it('should render children components', () => {
     render(<TestComponent />)
     expect(screen.getByRole('textbox')).toBeInTheDocument()
   })
 
-  it('renders submit button with correct text', () => {
+  it('should render submit button with correct text', () => {
     render(<TestComponent />)
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument()
   })
 
-  it('calls onSubmit when form is submitted', async () => {
+  it('should call onSubmit when form is submitted', async () => {
     render(<TestComponent />)
     const submitButton = screen.getByRole('button', { name: 'Submit' })
     fireEvent.click(submitButton)
@@ -54,7 +54,7 @@ describe('FormLayout', () => {
     })
   })
 
-  it('disables submit button and shows loading message when isLoading is true', () => {
+  it('should disable submit button and show loading message when isLoading is true', () => {
     const LoadingComponent = () => {
       const form = useForm()
       return (
