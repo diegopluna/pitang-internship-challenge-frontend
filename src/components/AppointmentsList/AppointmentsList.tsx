@@ -12,6 +12,7 @@ import { ScrollArea } from '../ui/scroll-area'
 import { Separator } from '../ui/separator'
 import { Skeleton } from '../ui/skeleton'
 import { Loader2 } from 'lucide-react'
+import { ptBR } from 'date-fns/locale'
 
 type GroupedAppointments = {
   [date: string]: {
@@ -88,7 +89,7 @@ const AppointmentsList = ({
         <h2 className="text-lg font-semibold mb-4 md:text-xl">Calendário</h2>
         <div className="flex items-center justify-center">
           <DatePicker
-            locale="pt-BR"
+            locale={ptBR.code}
             highlightDates={highlightedDays}
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date as Date)}
@@ -106,7 +107,10 @@ const AppointmentsList = ({
           </div>
         </div>
       </div>
-      <div className="flex-1 p-4 flex flex-col md:p-6 overflow-y-auto md:overflow-y-hidden">
+      <div
+        data-testid="appointments-list"
+        className="flex-1 p-4 flex flex-col md:p-6 overflow-y-auto md:overflow-y-hidden"
+      >
         <h2 className="text-lg font-semibold mb-4 md:text-xl">
           Agendamentos para {format(selectedDate, 'dd/MM/yyyy')}
         </h2>
@@ -176,19 +180,22 @@ AppointmentsList.Skeleton = () => {
     <div className="flex h-[calc(100vh-8.1rem)] w-full">
       <div className="w-80 p-6 border-r bg-muted text-muted-foreground">
         <h2 className="text-lg font-semibold mb-4">Calendário</h2>
-        <Skeleton className="h-60 bg-background w-full" />
+        <Skeleton
+          className="h-60 bg-background w-full"
+          data-testid="skeleton"
+        />
         <div className="mt-4 space-y-2">
           <div className="text-sm text-muted-foreground">
-            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-3/4" data-testid="skeleton" />
           </div>
           <div className="text-sm text-muted-foreground">
-            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-3/4" data-testid="skeleton" />
           </div>
         </div>
       </div>
       <div className="flex-1 p-6 flex flex-col">
         <h2 className="text-xl font-semibold mb-4">
-          <Skeleton className="h-6 w-1/2" />
+          <Skeleton className="h-6 w-1/2" data-testid="skeleton" />
         </h2>
         <Separator className="my-4" />
         <div className="h-full w-full flex items-center justify-center">
