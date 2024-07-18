@@ -1,9 +1,14 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import EditAppointmentForm from './EditAppointmentForm'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { faker } from '@faker-js/faker'
+
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
+  useNavigate: vi.fn(),
+}))
 
 describe('<EditAppointmentForm />', () => {
   const appointment = {

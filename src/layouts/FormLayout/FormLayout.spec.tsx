@@ -3,6 +3,11 @@ import { describe, it, expect, vi } from 'vitest'
 import FormLayout from './FormLayout'
 import { useForm } from 'react-hook-form'
 
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
+  useNavigate: vi.fn(),
+}))
+
 describe('FormLayout', () => {
   const mockOnSubmit = vi.fn()
 
