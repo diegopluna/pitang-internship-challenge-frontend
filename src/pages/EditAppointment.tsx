@@ -18,7 +18,7 @@ const EditAppointment = () => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center min-h-[calc(100vh-8rem)]">
+      <div className="flex justify-center items-center min-h-[calc(100vh-8.1rem)]">
         <Card className="max-w-md mx-auto p-6 sm:p-8">
           <CardHeader>
             <Skeleton className="h-6 w-48 mb-2" />
