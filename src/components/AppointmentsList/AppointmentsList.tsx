@@ -1,7 +1,7 @@
 import { Appointment, GroupedAppointments } from '@/@types/appointment'
 import { format } from 'date-fns'
 import { Card } from '../ui/card'
-import ActionsDropdown from '../AppointmentsDataTable/ActionsDropdown'
+import ActionsDropdown from '../ActionsDropdown'
 import { cn } from '@/utils/cn'
 import { Badge } from '../ui/badge'
 import { HighlightDate } from 'react-datepicker/dist/date_utils'

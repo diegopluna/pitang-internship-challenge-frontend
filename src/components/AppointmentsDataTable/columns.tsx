@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '../ui/button'
 import { ArrowUpDown } from 'lucide-react'
 import { cn } from '@/utils/cn'
-import ActionsDropdown from './ActionsDropdown'
+import ActionsDropdown from '../ActionsDropdown'
 import { Appointment } from '@/@types/appointment'
 
 export const columns: ColumnDef<Appointment>[] = [
