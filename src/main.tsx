@@ -7,6 +7,8 @@ import { ModalProvider } from './contexts/ModalContext.tsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ToastContextProvider } from './contexts/ToastContext.tsx'
+import 'react-datepicker/dist/react-datepicker.css'
+import '@/components/DatePicker/DatePicker.css'
 
 const queryClient = new QueryClient()
 

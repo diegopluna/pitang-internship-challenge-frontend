@@ -26,9 +26,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import 'react-datepicker/dist/react-datepicker.css'
-import './DatePicker.css'
-
 registerLocale('pt-BR', ptBR)
 
 export interface DatePickerProps {
