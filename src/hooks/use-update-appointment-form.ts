@@ -1,4 +1,4 @@
-import { Appointment } from "@/components/AppointmentsDataTable/columns";
+import { Appointment } from "@/@types/appointment";
 import { useModal } from "@/contexts/ModalContext";
 import { useUpdateAppointment } from "./use-update-appointment";
 import { z } from "zod";

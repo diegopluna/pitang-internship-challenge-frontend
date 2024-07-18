@@ -1,7 +1,7 @@
 import { render, screen } from '@/utils/customRender'
 import { describe, it, expect } from 'vitest'
 import AppointmentsList from './AppointmentsList'
-import { Appointment } from '../AppointmentsDataTable/columns'
+import { Appointment } from '@/@types/appointment'
 
 describe('AppointmentsList', () => {
   const mockAppointments: Appointment[] = [

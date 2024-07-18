@@ -1,19 +1,12 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
 import api, { handleApiError } from '@/utils/api'
-
-interface UpdateAppointmentData {
-  id: string
-  name: string
-  birthDay: Date
-  appointmentDate: Date
-  vaccinationComplete: boolean
-}
+import { Appointment } from '@/@types/appointment'
 
 export const useUpdateAppointment = () => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const updateAppointment = async (data: UpdateAppointmentData) => {
+  const updateAppointment = async (data: Appointment) => {
     setIsLoading(true)
     try {
       await api.put(`/appointments/${data.id}`, {

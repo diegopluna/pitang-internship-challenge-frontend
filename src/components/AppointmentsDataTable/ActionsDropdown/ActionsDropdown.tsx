@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Appointment } from '../columns'
+import { Appointment } from '@/@types/appointment'
 import { Button } from '@/components/ui/button'
 import { MoreHorizontal } from 'lucide-react'
 import { useToggleVaccinated } from '@/hooks/use-toggle-vaccinated'

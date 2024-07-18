@@ -1,5 +1,5 @@
 import { useUpdateAppointmentForm } from '@/hooks/use-update-appointment-form'
-import { Appointment } from '../AppointmentsDataTable/columns'
+import { Appointment } from '@/@types/appointment'
 import FormLayout from '@/layouts/FormLayout'
 import {
   FormControl,

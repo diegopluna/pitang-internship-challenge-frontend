@@ -5,14 +5,7 @@ import { Button } from '../ui/button'
 import { ArrowUpDown } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import ActionsDropdown from './ActionsDropdown'
-
-export type Appointment = {
-  id: string
-  name: string
-  birthDay: Date
-  appointmentDate: Date
-  vaccinationComplete: boolean
-}
+import { Appointment } from '@/@types/appointment'
 
 export const columns: ColumnDef<Appointment>[] = [
   {

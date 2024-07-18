@@ -1,5 +1,5 @@
 import DatePicker from 'react-datepicker'
-import { Appointment } from '../AppointmentsDataTable/columns'
+import { Appointment, GroupedAppointments } from '@/@types/appointment'
 import { format } from 'date-fns'
 import { Card } from '../ui/card'
 import ActionsDropdown from '../AppointmentsDataTable/ActionsDropdown'
@@ -17,12 +17,6 @@ import { ptBR } from 'date-fns/locale'
 import { useMemo } from 'react'
 
 registerLocale('pt-BR', ptBR)
-
-type GroupedAppointments = {
-  [date: string]: {
-    [hour: string]: Appointment[]
-  }
-}
 
 const AppointmentsList = ({
   appointments,
