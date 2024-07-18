@@ -6,7 +6,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import DatePicker from '@/components/DatePicker'
 import { useCreateAppointmentForm } from '@/hooks/use-create-appointment-form'
 import {
   getMinDate,
@@ -15,6 +14,7 @@ import {
   filterAppointmentTime,
 } from '@/utils/dateUtils'
 import FormLayout from '@/layouts/FormLayout'
+import CustomDatePicker from '../CustomDatePicker'
 
 const CreateAppointmentForm = () => {
   const { form, onSubmit, isLoading } = useCreateAppointmentForm()
@@ -49,13 +49,12 @@ const CreateAppointmentForm = () => {
           <FormItem>
             <FormLabel>Data de nascimento</FormLabel>
             <FormControl>
-              <DatePicker
-                showYearDropdown
+              <CustomDatePicker
                 futureYears={0}
                 maxDate={new Date()}
                 selected={field.value}
                 onChange={(date) => field.onChange(date)}
-                ariaLabel="Data de nascimento"
+                ariaDescribedBy="Data de nascimento"
               />
             </FormControl>
             <FormMessage />
@@ -69,11 +68,11 @@ const CreateAppointmentForm = () => {
           <FormItem>
             <FormLabel>Data e hora do agendamento</FormLabel>
             <FormControl>
-              <DatePicker
-                showYearDropdown
+              <CustomDatePicker
                 showTimeSelect
                 timeIntervals={60}
                 pastYears={0}
+                timeCaption="Horário"
                 minDate={getMinDate()}
                 selected={field.value || getMinDate()}
                 onChange={(date) => {
@@ -99,7 +98,7 @@ const CreateAppointmentForm = () => {
                 filterTime={(time) =>
                   filterAppointmentTime(time, field.value || new Date())
                 }
-                ariaLabel="Data e hora do agendamento"
+                ariaDescribedBy="Data e hora do agendamento"
               />
             </FormControl>
             <FormMessage />

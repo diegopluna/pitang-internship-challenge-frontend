@@ -1,4 +1,3 @@
-import DatePicker from 'react-datepicker'
 import { Appointment, GroupedAppointments } from '@/@types/appointment'
 import { format } from 'date-fns'
 import { Card } from '../ui/card'
@@ -6,17 +5,14 @@ import ActionsDropdown from '../AppointmentsDataTable/ActionsDropdown'
 import { cn } from '@/utils/cn'
 import { Badge } from '../ui/badge'
 import { HighlightDate } from 'react-datepicker/dist/date_utils'
-import { registerLocale } from 'react-datepicker'
 import useLocalStorage from '@/hooks/use-local-storage'
 import { LIST_APPOINTMENTS_CALENDAR_KEY } from '@/constants'
 import { ScrollArea } from '../ui/scroll-area'
 import { Separator } from '../ui/separator'
 import { Skeleton } from '../ui/skeleton'
 import { Loader2 } from 'lucide-react'
-import { ptBR } from 'date-fns/locale'
 import { useMemo } from 'react'
-
-registerLocale('pt-BR', ptBR)
+import CustomDatePicker from '../CustomDatePicker'
 
 const AppointmentsList = ({
   appointments,
@@ -90,12 +86,11 @@ const AppointmentsList = ({
       <div className="bg-muted text-muted-foreground p-4 border-b md:border-b-0 md:border-r md:p-6">
         <h2 className="text-lg font-semibold mb-4 md:text-xl">Calendário</h2>
         <div className="flex items-center justify-center">
-          <DatePicker
-            locale={ptBR.code}
+          <CustomDatePicker
             highlightDates={highlightedDays}
+            inline
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date as Date)}
-            inline
           />
         </div>
         <div className="mt-4 space-y-2">
