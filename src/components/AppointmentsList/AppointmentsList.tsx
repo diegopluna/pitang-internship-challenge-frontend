@@ -83,7 +83,7 @@ const AppointmentsList = ({
   ]
 
   return (
-    <div className="flex h-[calc(100vh-8.1rem)] flex-col md:flex-row md:flex-1 w-full">
+    <div className="flex min-h-[calc(100vh+8.1rem)] md:min-h-0 md:h-[calc(100vh-8.1rem)] flex-col md:flex-row md:flex-1 w-full">
       <div className="bg-muted text-muted-foreground p-4 border-b md:border-b-0 md:border-r md:p-6">
         <h2 className="text-lg font-semibold mb-4 md:text-xl">Calendário</h2>
         <div className="flex items-center justify-center">
