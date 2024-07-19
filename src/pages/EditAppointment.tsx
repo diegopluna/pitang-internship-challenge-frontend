@@ -17,39 +17,7 @@ const EditAppointment = () => {
     queryClient.refetchQueries({ queryKey: ['appointment', id!] })
   }
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center min-h-[calc(100vh-8.1rem)]">
-        <Card className="max-w-md mx-auto p-6 sm:p-8">
-          <CardHeader>
-            <Skeleton className="h-6 w-48 mb-2" />
-            <Skeleton className="h-4 w-72" />
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid gap-2">
-              <Skeleton className="h-4 w-32" />
-              <Skeleton className="h-10" />
-            </div>
-            <div className="grid gap-2">
-              <Skeleton className="h-4 w-40" />
-              <Skeleton className="h-10" />
-            </div>
-            <div className="grid gap-2">
-              <Skeleton className="h-4 w-48" />
-              <Skeleton className="h-10" />
-            </div>
-            <div className="grid gap-2 flex-row items-center">
-              <Skeleton className="h-4 w-40" />
-              <Skeleton className="h-6 w-6 rounded-full" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Skeleton className="h-10 w-full" />
-          </CardFooter>
-        </Card>
-      </div>
-    )
-
+  if (isLoading) return <LoadingState />
   if (error) return <ErrorState onRetry={handleRetry} />
 
   return (
@@ -58,5 +26,37 @@ const EditAppointment = () => {
     </div>
   )
 }
+
+const LoadingState = () => (
+  <div className="flex justify-center items-center min-h-[calc(100vh-8.1rem)]">
+    <Card className="max-w-md mx-auto p-6 sm:p-8">
+      <CardHeader>
+        <Skeleton className="h-6 w-48 mb-2" />
+        <Skeleton className="h-4 w-72" />
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="grid gap-2">
+          <Skeleton className="h-4 w-32" />
+          <Skeleton className="h-10" />
+        </div>
+        <div className="grid gap-2">
+          <Skeleton className="h-4 w-40" />
+          <Skeleton className="h-10" />
+        </div>
+        <div className="grid gap-2">
+          <Skeleton className="h-4 w-48" />
+          <Skeleton className="h-10" />
+        </div>
+        <div className="grid gap-2 flex-row items-center">
+          <Skeleton className="h-4 w-40" />
+          <Skeleton className="h-6 w-6 rounded-full" />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Skeleton className="h-10 w-full" />
+      </CardFooter>
+    </Card>
+  </div>
+)
 
 export default EditAppointment
