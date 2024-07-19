@@ -1,6 +1,6 @@
-import { Table } from '@tanstack/react-table'
+import { Table, flexRender } from '@tanstack/react-table'
+
 import { TableBody, TableCell, TableRow } from '@/components/ui/table'
-import { flexRender } from '@tanstack/react-table'
 
 interface TableBodyProps<TData> {
   table: Table<TData>

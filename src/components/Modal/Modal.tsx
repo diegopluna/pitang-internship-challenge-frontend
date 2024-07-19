@@ -1,4 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { CircleAlert, CircleCheck } from 'lucide-react'
+
+import { useModal } from '@/contexts/ModalContext'
 import {
   Dialog,
   DialogContent,
@@ -7,10 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { useModal } from '@/contexts/ModalContext'
-import { CircleAlert, CircleCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useNavigate } from 'react-router-dom'
 
 const Modal: React.FC = () => {
   const { isOpen, message, isError, closeModal } = useModal()

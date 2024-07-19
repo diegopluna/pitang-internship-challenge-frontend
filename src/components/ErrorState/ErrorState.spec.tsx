@@ -1,15 +1,16 @@
-import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
+
 import ErrorState from './ErrorState'
 
-describe('ErrorState', () => {
+describe('<ErrorState />', () => {
   const mockOnRetry = vi.fn()
 
   beforeEach(() => {
     mockOnRetry.mockClear()
   })
 
-  it('renders the error message correctly', () => {
+  it('should render the error message correctly', () => {
     render(<ErrorState onRetry={mockOnRetry} />)
 
     expect(screen.getByText('Ops, algo deu errado!')).toBeInTheDocument()
@@ -18,7 +19,7 @@ describe('ErrorState', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders the retry button', () => {
+  it('should render the retry button', () => {
     render(<ErrorState onRetry={mockOnRetry} />)
 
     const retryButton = screen.getByRole('button', {
@@ -27,7 +28,7 @@ describe('ErrorState', () => {
     expect(retryButton).toBeInTheDocument()
   })
 
-  it('calls onRetry when the retry button is clicked', () => {
+  it('should call onRetry when the retry button is clicked', () => {
     render(<ErrorState onRetry={mockOnRetry} />)
 
     const retryButton = screen.getByRole('button', {
@@ -38,7 +39,7 @@ describe('ErrorState', () => {
     expect(mockOnRetry).toHaveBeenCalledTimes(1)
   })
 
-  it('applies the correct CSS classes', () => {
+  it('should apply the correct CSS classes', () => {
     render(<ErrorState onRetry={mockOnRetry} />)
 
     const container = screen.getByTestId('error-state-container')

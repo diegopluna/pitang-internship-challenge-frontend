@@ -1,6 +1,7 @@
 import { Table } from '@tanstack/react-table'
+
+import CustomDatePicker from '@/components/CustomDatePicker'
 import { Input } from '@/components/ui/input'
-import DatePicker from '@/components/DatePicker'
 import {
   Select,
   SelectContent,
@@ -25,16 +26,20 @@ const TableFilters = <TData,>({ table }: TableFiltersProps<TData>) => {
           }
         />
         <div className="w-full sm:w-auto">
-          <DatePicker
+          <CustomDatePicker
             isClearable
             selected={
               (table.getColumn('appointmentDate')?.getFilterValue() as Date) ??
               null
             }
-            onChange={(date) =>
-              table.getColumn('appointmentDate')?.setFilterValue(date)
-            }
-            placeholder="Filtrar por data de agendamento"
+            onChange={(date) => {
+              if (!date) {
+                table.getColumn('appointmentDate')?.setFilterValue(undefined)
+              } else {
+                table.getColumn('appointmentDate')?.setFilterValue(date)
+              }
+            }}
+            placeholderText="Filtrar por data de agendamento"
             data-testid="date-picker-button"
           />
         </div>

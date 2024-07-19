@@ -1,7 +1,8 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
-import Modal from './Modal'
-import { ModalProvider, useModal } from '@/contexts/ModalContext'
 import { expect, describe, it, vi } from 'vitest'
+import { render, screen, fireEvent, act } from '@testing-library/react'
+
+import { ModalProvider, useModal } from '@/contexts/ModalContext'
+import Modal from './Modal'
 
 vi.mock('react-router-dom', () => ({
   ...vi.importActual('react-router-dom'),
@@ -16,8 +17,8 @@ const TestComponent = () => {
   )
 }
 
-describe('Modal', () => {
-  it('renders correctly when opened', () => {
+describe('<Modal />', () => {
+  it('should render correctly when opened', () => {
     render(
       <ModalProvider>
         <TestComponent />
@@ -32,7 +33,7 @@ describe('Modal', () => {
     expect(screen.getByText('Test message')).toBeInTheDocument()
   })
 
-  it('renders error state correctly', () => {
+  it('should render error state correctly', () => {
     let openModalFunction: (message: string, isError: boolean) => void
 
     const TestComponentWithHook = () => {
@@ -56,7 +57,7 @@ describe('Modal', () => {
     expect(screen.getByText('Error message')).toBeInTheDocument()
   })
 
-  it('closes when the close button is clicked', () => {
+  it('should close when the close button is clicked', () => {
     render(
       <ModalProvider>
         <TestComponent />
@@ -71,7 +72,7 @@ describe('Modal', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
-  it('displays the correct icon based on error state', () => {
+  it('should display the correct icon based on error state', () => {
     let openModalFunction: (message: string, isError: boolean) => void
 
     const TestComponentWithHook = () => {

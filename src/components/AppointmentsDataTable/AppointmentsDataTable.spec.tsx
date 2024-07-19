@@ -1,11 +1,12 @@
-import { screen, fireEvent, waitFor, within } from '@testing-library/react'
+import { format } from 'date-fns'
+import { faker } from '@faker-js/faker'
 import { describe, it, expect } from 'vitest'
+import { screen, fireEvent, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
 import { render } from '@/utils/customRender'
 import { columns } from '@/components/AppointmentsDataTable/columns'
-import { DataTable } from '@/components/AppointmentsDataTable/AppointmentsDataTable'
-import { faker } from '@faker-js/faker'
-import { format } from 'date-fns'
+import AppointmentsDataTable from '@/components/AppointmentsDataTable'
 
 const generateMockAppointments = (count: number) => {
   return Array.from({ length: count }, () => ({
@@ -17,10 +18,10 @@ const generateMockAppointments = (count: number) => {
   }))
 }
 
-describe('AppointmentsDataTable', () => {
-  it('renders the table with correct headers and data', () => {
+describe('<AppointmentsDataTable />', () => {
+  it('should render the table with correct headers and data', () => {
     const mockData = generateMockAppointments(5)
-    render(<DataTable columns={columns} data={mockData} />)
+    render(<AppointmentsDataTable columns={columns} data={mockData} />)
 
     expect(screen.getByText('Nome')).toBeInTheDocument()
     expect(screen.getByText('Data de Nascimento')).toBeInTheDocument()
@@ -49,9 +50,9 @@ describe('AppointmentsDataTable', () => {
     })
   })
 
-  it('filters the table by name', async () => {
+  it('should filter the table by name', async () => {
     const mockData = generateMockAppointments(10)
-    render(<DataTable columns={columns} data={mockData} />)
+    render(<AppointmentsDataTable columns={columns} data={mockData} />)
 
     const filterInput = screen.getByPlaceholderText('Filtrar por nome')
     const targetName = mockData[0].name
@@ -65,10 +66,10 @@ describe('AppointmentsDataTable', () => {
     })
   })
 
-  it('sorts the table by name', async () => {
+  it('should sort the table by name', async () => {
     const user = userEvent.setup()
     const mockData = generateMockAppointments(10)
-    render(<DataTable columns={columns} data={mockData} />)
+    render(<AppointmentsDataTable columns={columns} data={mockData} />)
 
     const nameHeader = screen.getByRole('button', { name: /nome/i })
 
@@ -130,9 +131,9 @@ describe('AppointmentsDataTable', () => {
     )
   })
 
-  it('paginates the table', async () => {
+  it('should paginate the table', async () => {
     const mockData = generateMockAppointments(15)
-    render(<DataTable columns={columns} data={mockData} />)
+    render(<AppointmentsDataTable columns={columns} data={mockData} />)
 
     expect(screen.getByText('Página 1 de 2')).toBeInTheDocument()
     expect(screen.getByText('Próxima')).toBeEnabled()

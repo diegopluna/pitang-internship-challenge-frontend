@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+
 import { Button } from '@/components/ui/button'
 import NotFoundImage from '@/assets/images/404.svg'
 
@@ -9,9 +10,20 @@ export default function NotFound() {
         src={NotFoundImage}
         width={200}
         height={200}
-        alt="ilustração 404"
+        alt="ilustração 404 "
         className="mx-auto"
       />
+      <p className="text-xs text-muted-foreground mt-2">
+        Imagem por{' '}
+        <a
+          href="https://popsy.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          Popsy
+        </a>
+      </p>
       <h1 className="mt-8 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
         Ops, página não encontrada!
       </h1>

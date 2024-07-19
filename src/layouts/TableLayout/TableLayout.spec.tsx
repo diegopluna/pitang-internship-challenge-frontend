@@ -1,27 +1,28 @@
-import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import ListLayout from './ListLayout'
+import { render, screen } from '@testing-library/react'
 
-describe('ListLayout', () => {
-  it('renders the title and description correctly', () => {
+import TableLayout from './TableLayout'
+
+describe('<TableLayout />', () => {
+  it('should render the title and description correctly', () => {
     const title = 'Test Title'
     const description = 'Test Description'
     render(
-      <ListLayout title={title} description={description}>
+      <TableLayout title={title} description={description}>
         <div>Child content</div>
-      </ListLayout>,
+      </TableLayout>,
     )
 
     expect(screen.getByText(title)).toBeInTheDocument()
     expect(screen.getByText(description)).toBeInTheDocument()
   })
 
-  it('renders children content', () => {
+  it('should render children content', () => {
     const childText = 'Child content'
     render(
-      <ListLayout title="Test" description="Test">
+      <TableLayout title="Test" description="Test">
         <div>{childText}</div>
-      </ListLayout>,
+      </TableLayout>,
     )
 
     expect(screen.getByText(childText)).toBeInTheDocument()

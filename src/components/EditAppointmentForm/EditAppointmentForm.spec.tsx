@@ -1,9 +1,16 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import EditAppointmentForm from './EditAppointmentForm'
-import { ModalProvider } from '@/contexts/ModalContext'
+import { describe, it, expect, vi } from 'vitest'
 import { faker } from '@faker-js/faker'
+import { render, screen, waitFor } from '@/utils/customRender'
+import userEvent from '@testing-library/user-event'
+
+import { ModalProvider } from '@/contexts/ModalContext'
+import EditAppointmentForm from './EditAppointmentForm'
+
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
+  useNavigate: vi.fn(),
+  MemoryRouter: ({ children }: { children: React.ReactNode }) => children,
+}))
 
 describe('<EditAppointmentForm />', () => {
   const appointment = {
@@ -14,7 +21,7 @@ describe('<EditAppointmentForm />', () => {
     vaccinationComplete: faker.datatype.boolean(),
   }
 
-  it('should renders the form correctly with pre-filled data', () => {
+  it('should render the form correctly with pre-filled data', () => {
     const appointment = {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
@@ -39,7 +46,7 @@ describe('<EditAppointmentForm />', () => {
     ).toBeInTheDocument()
   })
 
-  it('displays error messages for invalid inputs', async () => {
+  it('should display error messages for invalid inputs', async () => {
     render(
       <ModalProvider>
         <EditAppointmentForm appointment={appointment} />

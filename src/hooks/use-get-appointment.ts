@@ -1,21 +1,7 @@
-import api from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
-interface AppointmentResponse {
-  id: string
-  name: string
-  birthDay: string
-  appointmentDate: string
-  vaccinationComplete: boolean
-}
-
-interface Appointment {
-  id: string
-  name: string
-  birthDay: Date
-  appointmentDate: Date
-  vaccinationComplete: boolean
-}
+import api from "@/utils/api";
+import { AppointmentResponse, Appointment } from "@/@types/appointment";
 
 export const useGetAppointment = (id: string) => {
   return useQuery({

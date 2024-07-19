@@ -1,8 +1,9 @@
-import { useToast } from '@/contexts/ToastContext'
-import { cn } from '@/utils/cn'
 import { cva } from 'class-variance-authority'
-import { AlertTriangle, Check, Info, X, XCircle } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { AlertTriangle, Check, Info, X, XCircle } from 'lucide-react'
+
+import { cn } from '@/utils/cn'
+import { useToast } from '@/contexts/ToastContext'
 
 export const toastVariants = cva(
   'flex items-center rounded-md shadow p-4 relative w-80 overflow-hidden animate-slide-in',

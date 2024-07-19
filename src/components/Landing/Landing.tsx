@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import landingImage from '@/assets/images/landing.svg'
+
 import { FREEPIK_URL } from '@/constants'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
+import landingImage from '@/assets/images/landing.svg'
 
 const Landing = () => {
   return (
@@ -36,7 +37,7 @@ const Landing = () => {
             className="mx-auto aspect-square w-full object-cover object-center"
           />
           <p className="text-xs text-muted-foreground mt-2">
-            Designed by{' '}
+            Imagem por{' '}
             <a href={FREEPIK_URL} target="_blank" className="hover:underline">
               Freepik
             </a>

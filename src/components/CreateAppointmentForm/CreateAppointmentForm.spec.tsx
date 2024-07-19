@@ -1,26 +1,20 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import CreateAppointmentForm from './CreateAppointmentForm'
-import { ModalProvider } from '@/contexts/ModalContext'
 
-vi.mock('@/utils/api', () => ({
-  default: {
-    post: vi.fn(),
-  },
-  getErrorMessage: vi.fn(),
-}))
+import { ModalProvider } from '@/contexts/ModalContext'
+import CreateAppointmentForm from './CreateAppointmentForm'
 
 vi.mock('react-router-dom', () => ({
   useNavigate: () => vi.fn(),
 }))
 
-describe('CreateAppointmentForm', () => {
+describe('<CreateAppointmentForm />', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
-  it('renders the form correctly', () => {
+  it('should render the form correctly', () => {
     render(
       <ModalProvider>
         <CreateAppointmentForm />
@@ -37,7 +31,7 @@ describe('CreateAppointmentForm', () => {
     expect(screen.getByRole('button', { name: 'Agendar' })).toBeInTheDocument()
   })
 
-  it('displays error messages for invalid inputs', async () => {
+  it('should display error messages for invalid inputs', async () => {
     render(
       <ModalProvider>
         <CreateAppointmentForm />

@@ -1,10 +1,10 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import Toast, { toastVariants } from './Toast'
-import { ToastProps } from './Toast'
-import { ToastContext, ToastContextType } from '@/contexts/ToastContext'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 
-describe('Toast', () => {
+import { ToastContext, ToastContextType } from '@/contexts/ToastContext'
+import Toast, { toastVariants, ToastProps } from './Toast'
+
+describe('<Toast />', () => {
   const mockRemove = vi.fn()
   const defaultProps: ToastProps = {
     id: 1,
@@ -32,13 +32,13 @@ describe('Toast', () => {
     )
   }
 
-  it('renders the toast with correct message and variant', () => {
+  it('should render the toast with correct message and variant', () => {
     renderToast()
     expect(screen.getByText('Test message')).toBeInTheDocument()
     expect(screen.getByRole('alert')).toHaveClass('bg-blue-100')
   })
 
-  it('calls remove function after 4 + 0.4(animation) seconds', () => {
+  it('should call remove function after 4 + 0.4(animation) seconds', () => {
     renderToast()
     act(() => {
       vi.advanceTimersByTime(4400)
@@ -47,7 +47,7 @@ describe('Toast', () => {
     expect(mockRemove.mock.calls[0][0]).toBe(1)
   })
 
-  it('dismisses the toast when close button is clicked', async () => {
+  it('should dismiss the toast when close button is clicked', async () => {
     renderToast()
     const closeButton = screen.getByRole('button')
     fireEvent.click(closeButton)
@@ -59,7 +59,7 @@ describe('Toast', () => {
     expect(mockRemove).toHaveBeenCalledWith(1)
   })
 
-  it('pauses the progress bar on mouse enter', () => {
+  it('should pause the progress bar on mouse enter', () => {
     renderToast()
     const toast = screen.getByRole('alert')
     fireEvent.mouseEnter(toast)
@@ -67,7 +67,7 @@ describe('Toast', () => {
     expect(progressBar).toHaveStyle('animation-play-state: paused')
   })
 
-  it('resumes the progress bar on mouse leave', () => {
+  it('should resume the progress bar on mouse leave', () => {
     renderToast()
     const toast = screen.getByRole('alert')
     fireEvent.mouseEnter(toast)
@@ -76,12 +76,12 @@ describe('Toast', () => {
     expect(progressBar).toHaveStyle('animation-play-state: running')
   })
 
-  it('applies correct variant classes', () => {
+  it('should apply correct variant classes', () => {
     renderToast({ variant: 'success' })
     expect(screen.getByRole('alert')).toHaveClass('bg-green-100')
   })
 
-  it('renders correct icon and class for each variant', () => {
+  it('should render correct icon and class for each variant', () => {
     const variants = ['info', 'success', 'warning', 'destructive'] as const
     variants.forEach((variant) => {
       const { unmount } = renderToast({ variant })

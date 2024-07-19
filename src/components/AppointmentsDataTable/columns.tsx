@@ -1,18 +1,12 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { format, isSameDay } from 'date-fns'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '../ui/button'
 import { ArrowUpDown } from 'lucide-react'
-import { cn } from '@/utils/cn'
-import ActionsDropdown from './ActionsDropdown'
+import { ColumnDef } from '@tanstack/react-table'
 
-export type Appointment = {
-  id: string
-  name: string
-  birthDay: Date
-  appointmentDate: Date
-  vaccinationComplete: boolean
-}
+import { Appointment } from '@/@types/appointment'
+import ActionsDropdown from '@/components/ActionsDropdown'
+import { cn } from '@/utils/cn'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 export const columns: ColumnDef<Appointment>[] = [
   {

@@ -1,10 +1,11 @@
-import { render, screen } from '@/utils/customRender'
-import Footer from './Footer'
 import { describe, it, expect } from 'vitest'
-import { COPYRIGHT_YEAR, APP_NAME } from '@/constants'
+import { render, screen } from '@testing-library/react'
 
-describe('Footer', () => {
-  it('renders the footer with correct text and styling', () => {
+import { COPYRIGHT_YEAR, APP_NAME } from '@/constants'
+import Footer from './Footer'
+
+describe('<Footer />', () => {
+  it('should render the footer with correct text and styling', () => {
     render(<Footer />)
 
     const footer = screen.getByRole('contentinfo')

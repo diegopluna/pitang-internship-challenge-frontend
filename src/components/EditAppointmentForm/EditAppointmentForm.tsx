@@ -1,5 +1,5 @@
+import { Appointment } from '@/@types/appointment'
 import { useUpdateAppointmentForm } from '@/hooks/use-update-appointment-form'
-import { Appointment } from '../AppointmentsDataTable/columns'
 import FormLayout from '@/layouts/FormLayout'
 import {
   FormControl,
@@ -7,16 +7,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form'
-import { Input } from '../ui/input'
-import DatePicker from '../DatePicker'
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   filterAppointmentTime,
   getMaxTime,
   getMinDate,
   getMinTime,
-} from '@/utils/date-utils'
-import { Switch } from '../ui/switch'
+} from '@/utils/dateUtils'
+import { Switch } from '@/components/ui/switch'
+import CustomDatePicker from '@/components/CustomDatePicker'
 
 const EditAppointmentForm = ({ appointment }: { appointment: Appointment }) => {
   const { form, onSubmit, isLoading } = useUpdateAppointmentForm(appointment)
@@ -51,13 +51,13 @@ const EditAppointmentForm = ({ appointment }: { appointment: Appointment }) => {
           <FormItem>
             <FormLabel>Data de nascimento</FormLabel>
             <FormControl>
-              <DatePicker
-                showYearDropdown
+              <CustomDatePicker
+                /// Birthday cannot be in the future
                 futureYears={0}
                 maxDate={new Date()}
                 selected={field.value}
                 onChange={(date) => field.onChange(date)}
-                ariaLabel="Data de nascimento"
+                ariaDescribedBy="Data de nascimento"
               />
             </FormControl>
             <FormMessage />
@@ -71,37 +71,47 @@ const EditAppointmentForm = ({ appointment }: { appointment: Appointment }) => {
           <FormItem>
             <FormLabel>Data e hora do agendamento</FormLabel>
             <FormControl>
-              <DatePicker
-                showYearDropdown
+              <CustomDatePicker
                 showTimeSelect
+                // Only allow time intervals of 60 minutes
                 timeIntervals={60}
+                // Past years are not allowed
                 pastYears={0}
+                // Get the minimum allowed date for an appointment
                 minDate={getMinDate()}
                 selected={field.value}
                 onChange={(date) => {
+                  // if not date is selected return early
                   if (!date) return
+                  // set minutes, seconds and ms to 0
                   date.setMinutes(0, 0, 0)
+                  // get the earliest possible time for the appointment
                   const minTime = getMinTime(date)
+                  // get the latest possible time for the appointment
                   const maxTime = getMaxTime()
 
+                  // if the earliest possible time is after the latest possible time, return early
                   if (minTime.getHours() > maxTime.getHours()) {
                     return
                   }
 
+                  // if the selected time is before the earliest possible time, set the earliest possible time
                   if (date.getHours() < minTime.getHours()) {
                     date.setHours(minTime.getHours())
-                  } else if (date.getHours() === minTime.getHours()) {
-                    date.setHours
                   }
 
+                  // set the selected time
                   field.onChange(date)
                 }}
+                // Get the minimum allowed time for an appointment
                 minTime={getMinTime(field.value)}
+                // Get the maximum allowed time for an appointment
                 maxTime={getMaxTime()}
+                // Filter the time for an appointment based on the selected date
                 filterTime={(time) =>
                   filterAppointmentTime(time, field.value || new Date())
                 }
-                ariaLabel="Data e hora do agendamento"
+                ariaDescribedBy="Data e hora do agendamento"
               />
             </FormControl>
             <FormMessage />

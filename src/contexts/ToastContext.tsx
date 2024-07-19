@@ -1,5 +1,6 @@
-import { ToastProps } from '@/components/Toast/Toast'
 import { createContext, useContext, useReducer } from 'react'
+
+import { ToastProps } from '@/components/Toast/Toast'
 import ToastsContainer from '@/components/Toast/ToastsContainer'
 
 interface ToastState {

@@ -1,17 +1,13 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
-import api, { handleApiError } from '@/utils/api'
 
-interface AppointmentData {
-  name: string
-  birthDay: Date
-  appointmentDate: Date
-}
+import api, { handleApiError } from '@/utils/api'
+import { AppointmentInputData } from '@/@types/appointment'
 
 export const useCreateAppointment = () => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const createAppointment = async (data: AppointmentData) => {
+  const createAppointment = async (data: AppointmentInputData) => {
     setIsLoading(true)
     try {
       await api.post('/appointments', {

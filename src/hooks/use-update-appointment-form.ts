@@ -1,16 +1,23 @@
-import { Appointment } from "@/components/AppointmentsDataTable/columns";
-import { useModal } from "@/contexts/ModalContext";
-import { useUpdateAppointment } from "./use-update-appointment";
-import { z } from "zod";
-import { APPOINTMENT_FORM_STORAGE_KEY_EDIT } from "@/constants";
-import { usePersistedForm } from "./use-persisted-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { APPOINTMENT_FORM_STORAGE_KEY_EDIT } from "@/constants";
 import { AppError } from "@/utils/api";
+import { Appointment } from "@/@types/appointment";
+import { useModal } from "@/contexts/ModalContext";
+import { useToast } from "@/contexts/ToastContext";
+import { usePersistedForm } from "./use-persisted-form";
+import { useUpdateAppointment } from "./use-update-appointment";
 
 
 
 export const useUpdateAppointmentForm = (appointment: Appointment) => {
+  const toast = useToast()
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
   const { openModal } = useModal()
   const { updateAppointment, isLoading } = useUpdateAppointment()
 
@@ -60,8 +67,10 @@ export const useUpdateAppointmentForm = (appointment: Appointment) => {
 
     try {
       await updateAppointment(appointmentData)
-      openModal('Agendamento atualizado com sucesso!', false)
       localStorage.removeItem(APPOINTMENT_FORM_STORAGE_KEY_EDIT + '-' + appointment.id)
+      toast.success('Agendamento atualizado com sucesso!')
+      navigate('/agendamentos')
+      queryClient.invalidateQueries({ queryKey: ['appointment', appointment.id] })
     } catch (error ) {
       if (error instanceof AppError) {
         openModal(error.message, true)
@@ -77,7 +86,7 @@ export const useUpdateAppointmentForm = (appointment: Appointment) => {
         openModal('Ocorreu um erro inesperado. Por favor, tente novamente.', true)
       }
     }
-  }, [updateAppointment, openModal, form, appointment])
+  }, [updateAppointment, openModal, form, appointment, navigate, toast, queryClient])
 
   return { form, onSubmit, isLoading }
 }
