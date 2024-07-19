@@ -5,13 +5,6 @@ import userEvent from '@testing-library/user-event'
 import { ModalProvider } from '@/contexts/ModalContext'
 import CreateAppointmentForm from './CreateAppointmentForm'
 
-vi.mock('@/utils/api', () => ({
-  default: {
-    post: vi.fn(),
-  },
-  getErrorMessage: vi.fn(),
-}))
-
 vi.mock('react-router-dom', () => ({
   useNavigate: () => vi.fn(),
 }))

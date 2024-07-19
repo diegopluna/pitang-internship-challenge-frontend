@@ -33,7 +33,7 @@ describe('<AppointmentsCalendar />', () => {
     expect(screen.getByTestId('appointments-list')).toBeInTheDocument()
   })
 
-  it('displays "Nenhum agendamento encontrado" when there are no appointments for the selected date', () => {
+  it('should display "Nenhum agendamento encontrado" when there are no appointments for the selected date', () => {
     const emptyAppointments: Appointment[] = []
     render(<AppointmentsCalendar appointments={emptyAppointments} />)
 
@@ -42,7 +42,7 @@ describe('<AppointmentsCalendar />', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders the correct variant for vaccination status', () => {
+  it('should render the correct variant for vaccination status', () => {
     render(<AppointmentsCalendar appointments={mockAppointments} />)
 
     const notVaccinatedBadge = screen.getByText('Não vacinado')
@@ -52,7 +52,7 @@ describe('<AppointmentsCalendar />', () => {
     expect(vaccinatedBadge).toHaveClass('bg-green-100 text-green-800')
   })
 
-  it('renders the Skeleton component when in loading state', () => {
+  it('should render the Skeleton component when in loading state', () => {
     render(<AppointmentsCalendar.Skeleton />)
 
     const skeletonElements = screen.getAllByTestId('skeleton')

@@ -12,13 +12,6 @@ vi.mock('react-router-dom', () => ({
   Link: ({ children }: { children: React.ReactNode }) => children,
 }))
 
-vi.mock('@/hooks/use-toggle-vaccinated', () => ({
-  useToggleVaccinated: () => ({
-    mutate: vi.fn(),
-    isPending: false,
-  }),
-}))
-
 describe('<ActionsDropdown />', () => {
   const mockAppointment = {
     id: faker.string.uuid(),
@@ -56,6 +49,11 @@ describe('<ActionsDropdown />', () => {
         ? /Marcar como não vacinado/i
         : /Marcar como vacinado/i,
     })
+
+    const editButton = screen.getByRole('menuitem', {
+      name: /Editar/i,
+    })
     expect(toggleVaccinationButton).toBeInTheDocument()
+    expect(editButton).toBeInTheDocument()
   })
 })
