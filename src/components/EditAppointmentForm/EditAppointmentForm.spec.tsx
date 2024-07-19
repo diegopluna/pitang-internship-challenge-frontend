@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { faker } from '@faker-js/faker'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@/utils/customRender'
 import userEvent from '@testing-library/user-event'
 
 import { ModalProvider } from '@/contexts/ModalContext'
@@ -9,6 +9,7 @@ import EditAppointmentForm from './EditAppointmentForm'
 vi.mock('react-router-dom', () => ({
   ...vi.importActual('react-router-dom'),
   useNavigate: vi.fn(),
+  MemoryRouter: ({ children }: { children: React.ReactNode }) => children,
 }))
 
 describe('<EditAppointmentForm />', () => {
