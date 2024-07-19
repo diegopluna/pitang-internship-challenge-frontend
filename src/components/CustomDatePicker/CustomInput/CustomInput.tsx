@@ -6,6 +6,7 @@ import { registerLocale } from 'react-datepicker'
 
 import { cn } from '@/utils/cn'
 import { Button } from '@/components/ui/button'
+import { formatInTimeZone } from 'date-fns-tz'
 
 registerLocale('pt-BR', ptBR)
 
@@ -20,6 +21,7 @@ export interface CustomInputProps {
     date: Date | null,
     event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
   ) => void
+  timeZone?: string
 }
 
 const CustomInput = forwardRef<HTMLButtonElement, CustomInputProps>(
@@ -31,6 +33,7 @@ const CustomInput = forwardRef<HTMLButtonElement, CustomInputProps>(
       placeholderText,
       selected,
       onChange,
+      timeZone,
     },
     ref,
   ) => (
@@ -41,7 +44,7 @@ const CustomInput = forwardRef<HTMLButtonElement, CustomInputProps>(
         onClick={onClick}
         ref={ref}
         className={cn(
-          'w-full justify-start text-left font-normal',
+          'w-full justify-start text-left font-normal h-fit text-wrap md:h-10 md:text-nowrap',
           !selected && 'text-muted-foreground',
           isClearable && 'pr-10',
         )}
@@ -49,11 +52,15 @@ const CustomInput = forwardRef<HTMLButtonElement, CustomInputProps>(
         <CalendarIcon className="mr-2 size-4" />
         {selected ? (
           <>
-            {format(selected, 'PPP', { locale: ptBR })}
+            {timeZone
+              ? formatInTimeZone(selected, timeZone, 'PPP', { locale: ptBR })
+              : format(selected, 'PPP', { locale: ptBR })}
             {showTimeSelect && (
               <>
                 <Clock className="ml-2 mr-2 inline h-4 w-4" />
-                {format(selected, 'HH:mm')}
+                {timeZone
+                  ? formatInTimeZone(selected, timeZone, 'HH:mm')
+                  : format(selected, 'HH:mm')}
               </>
             )}
           </>

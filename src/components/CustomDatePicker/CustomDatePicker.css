@@ -4,7 +4,7 @@
 }
 
 .react-datepicker__month-container {
-  @apply w-[280px];
+  @apply w-[245px] lg:w-[280px];
 }
 
 .react-datepicker__header {
@@ -28,7 +28,7 @@
 }
 
 .react-datepicker__week {
-  @apply grid grid-cols-7 gap-0.5;
+  @apply grid grid-cols-7 gap-[0.075rem] lg:gap-0.5;
 }
 
 .react-datepicker__day {

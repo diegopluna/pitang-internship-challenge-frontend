@@ -54,6 +54,8 @@ const EditAppointmentForm = ({ appointment }: { appointment: Appointment }) => {
               <CustomDatePicker
                 /// Birthday cannot be in the future
                 futureYears={0}
+                // Birthday is always at midnight UTC
+                timeZone="UTC"
                 maxDate={new Date()}
                 selected={field.value}
                 onChange={(date) => field.onChange(date)}

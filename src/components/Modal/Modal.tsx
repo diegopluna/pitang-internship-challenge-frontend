@@ -37,7 +37,7 @@ const Modal: React.FC = () => {
           </DialogHeader>
           <DialogDescription>{message}</DialogDescription>
         </div>
-        <DialogFooter>
+        <DialogFooter className=" flex flex-row gap-2 justify-end">
           <div>
             <Button variant="destructive" onClick={closeModal}>
               Fechar

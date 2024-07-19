@@ -7,6 +7,7 @@ import ActionsDropdown from '@/components/ActionsDropdown'
 import { cn } from '@/utils/cn'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { formatInTimeZone } from 'date-fns-tz'
 
 export const columns: ColumnDef<Appointment>[] = [
   {
@@ -39,7 +40,9 @@ export const columns: ColumnDef<Appointment>[] = [
         </div>
       )
     },
-    cell: ({ row }) => <div>{format(row.original.birthDay, 'dd/MM/yyyy')}</div>,
+    cell: ({ row }) => (
+      <div>{formatInTimeZone(row.original.birthDay, 'UTC', 'dd/MM/yyyy')}</div>
+    ),
   },
   {
     accessorKey: 'appointmentDate',

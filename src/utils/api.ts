@@ -8,7 +8,7 @@ const api = axios.create({
 
 interface ApiErrorResponse {
   message: string
-  errors?: Record<string, string[]>
+  issues?: Record<string, string[]>
 }
 
 export class AppError extends Error {
@@ -28,7 +28,7 @@ export function handleApiError(error: unknown): AppError {
     return new AppError(
       data.message || 'Ocorreu um erro inesperado',
       error.response.status.toString(),
-      data.errors
+      data.issues
     )
   } else if (error instanceof Error) {
     return new AppError(error.message)

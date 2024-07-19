@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import CustomInput, { CustomInputProps } from './CustomInput'
 import CustomHeader from './CustomHeader'
 import './CustomDatePicker.css'
+import { toZonedTime } from 'date-fns-tz'
 
 registerLocale('pt-BR', ptBR)
 
@@ -13,6 +14,7 @@ export type CustomDatePickerProps = {
   futureYears?: number
   minMonth?: number
   maxMonth?: number
+  timeZone?: string
 } & DatePickerProps
 
 const CustomDatePicker = ({
@@ -20,6 +22,7 @@ const CustomDatePicker = ({
   futureYears = 70,
   minMonth = 0,
   maxMonth = 11,
+  timeZone,
   ...props
 }: CustomDatePickerProps) => {
   const currentYear = new Date().getFullYear()
@@ -45,6 +48,9 @@ const CustomDatePicker = ({
           ),
         )
       }
+      selected={
+        timeZone ? toZonedTime(props.selected!, timeZone) : props.selected
+      }
       wrapperClassName="w-full"
       locale="pt-BR"
       isClearable={false}
@@ -55,6 +61,7 @@ const CustomDatePicker = ({
           selected={props.selected}
           showTimeSelect={props.showTimeSelect}
           onChange={props.onChange as CustomInputProps['onChange']}
+          timeZone={timeZone}
         />
       }
       renderCustomHeader={(props) => (
