@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event'
 import { render } from '@/utils/customRender'
 import { columns } from '@/components/AppointmentsDataTable/columns'
 import AppointmentsDataTable from '@/components/AppointmentsDataTable'
+import { formatInTimeZone } from 'date-fns-tz'
 
 const generateMockAppointments = (count: number) => {
   return Array.from({ length: count }, () => ({
@@ -35,7 +36,9 @@ describe('<AppointmentsDataTable />', () => {
 
       expect(within(row).getByText(appointment.name)).toBeInTheDocument()
       expect(
-        within(row).getByText(format(appointment.birthDay, 'dd/MM/yyyy')),
+        within(row).getByText(
+          formatInTimeZone(appointment.birthDay, 'UTC', 'dd/MM/yyyy'),
+        ),
       ).toBeInTheDocument()
       expect(
         within(row).getByText(
