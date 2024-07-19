@@ -5,7 +5,7 @@ import { GroupedAppointments } from '@/@types/appointment'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import AppointmentCard from '@/components/AppointmentsCalendar/AppointmentCard'
+import AppointmentCard from '@/components/AppointmentsCalendar/ListSection/AppointmentCard'
 
 interface ListSectionProps {
   selectedDate: Date
