@@ -79,7 +79,7 @@ const CreateAppointmentForm = () => {
                 // Get the minimum allowed date for an appointment
                 minDate={getMinDate()}
                 // If no date is selected, set the minimum date
-                selected={field.value || getMinDate()}
+                selected={field.value}
                 onChange={(date) => {
                   // if not date is selected return early
                   if (!date) return
