@@ -11,6 +11,12 @@ import { columns } from '@/components/AppointmentsDataTable/columns'
 import AppointmentsDataTable from '@/components/AppointmentsDataTable'
 import AppointmentsCalendar from '@/components/AppointmentsCalendar'
 import { Button } from '@/components/ui/button'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 const ListAppointments = () => {
   const [view, setView] = useLocalStorage<'table' | 'calendar'>(
@@ -67,21 +73,26 @@ const ViewToggleButton = ({
   view: 'table' | 'calendar'
   onToggle: () => void
 }) => (
-  <div className="flex flex-col-reverse gap-y-3 z-[8000] fixed">
-    <div className="relative">
-      <Button
-        variant="default"
-        className="fixed bottom-20 right-6 rounded-full shadow-lg"
-        onClick={onToggle}
-      >
-        {view === 'table' ? (
-          <Calendar className="size-6" />
-        ) : (
-          <Table className="size-6" />
-        )}
-      </Button>
-    </div>
-  </div>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="default"
+          className="fixed bottom-20 right-6 rounded-full shadow-lg z-[8000]"
+          onClick={onToggle}
+        >
+          {view === 'table' ? (
+            <Calendar className="size-6" />
+          ) : (
+            <Table className="size-6" />
+          )}
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Alternar para {view === 'table' ? 'Calendário' : 'Tabela'}</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
 )
 
 export default ListAppointments
