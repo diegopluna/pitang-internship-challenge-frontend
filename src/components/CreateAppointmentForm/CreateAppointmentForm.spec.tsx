@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, waitFor } from '@/utils/customRender'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { ModalProvider } from '@/contexts/ModalContext'
@@ -7,7 +7,6 @@ import CreateAppointmentForm from './CreateAppointmentForm'
 
 vi.mock('react-router-dom', () => ({
   useNavigate: () => vi.fn(),
-  MemoryRouter: ({ children }: { children: React.ReactNode }) => children,
 }))
 
 describe('<CreateAppointmentForm />', () => {

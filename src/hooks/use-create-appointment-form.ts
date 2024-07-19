@@ -32,7 +32,7 @@ type FormData = z.infer<typeof formSchema>
 
 export const useCreateAppointmentForm = () => {
   const { openModal } = useModal()
-  const mutation = useCreateAppointment()
+  const { createAppointment, isLoading } = useCreateAppointment()
 
   const form = usePersistedForm<FormData>(APPOINTMENT_FORM_STORAGE_KEY, {
     resolver: zodResolver(formSchema),
@@ -44,17 +44,16 @@ export const useCreateAppointmentForm = () => {
   })
 
   const onSubmit = useCallback(async (data: FormData) => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        openModal('Agendamento realizado com sucesso!', false)
-        form.reset({
+    try {
+      await createAppointment(data)
+      openModal('Agendamento realizado com sucesso!', false)
+      form.reset({
         name: '',
         birthDay: undefined,
         appointmentDate: undefined,
       })
       localStorage.removeItem(APPOINTMENT_FORM_STORAGE_KEY)
-    },
-    onError: (error) => {
+    } catch (error ) {
       if (error instanceof AppError) {
         openModal(error.message, true)
         if (error.details) {
@@ -68,13 +67,12 @@ export const useCreateAppointmentForm = () => {
       } else {
         openModal('Ocorreu um erro inesperado. Por favor, tente novamente.', true)
       }
-    },
-  })
-  }, [mutation, openModal, form])
+    }
+  }, [createAppointment, openModal, form])
 
   return {
     form,
     onSubmit,
-    isLoading: mutation.isPending,
+    isLoading,
   }
 }
