@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AppRoutes from '@/routes.tsx'
 import { ModalProvider } from '@/contexts/ModalContext.tsx'
@@ -17,7 +16,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ModalProvider>
         <ToastContextProvider>
           <AppRoutes />
-          <ReactQueryDevtools buttonPosition="bottom-left" />
         </ToastContextProvider>
       </ModalProvider>
     </QueryClientProvider>
