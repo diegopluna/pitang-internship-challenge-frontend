@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
-import ListLayout from './ListLayout'
+import TableLayout from './TableLayout'
 
-describe('<ListLayout />', () => {
+describe('<TableLayout />', () => {
   it('should render the title and description correctly', () => {
     const title = 'Test Title'
     const description = 'Test Description'
     render(
-      <ListLayout title={title} description={description}>
+      <TableLayout title={title} description={description}>
         <div>Child content</div>
-      </ListLayout>,
+      </TableLayout>,
     )
 
     expect(screen.getByText(title)).toBeInTheDocument()
@@ -20,9 +20,9 @@ describe('<ListLayout />', () => {
   it('should render children content', () => {
     const childText = 'Child content'
     render(
-      <ListLayout title="Test" description="Test">
+      <TableLayout title="Test" description="Test">
         <div>{childText}</div>
-      </ListLayout>,
+      </TableLayout>,
     )
 
     expect(screen.getByText(childText)).toBeInTheDocument()

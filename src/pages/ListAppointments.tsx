@@ -5,7 +5,7 @@ import { LIST_APPOINTMENTS_VIEW_KEY } from '@/constants'
 import { useGetAppointments } from '@/hooks/use-get-appointments'
 import useLocalStorage from '@/hooks/use-local-storage'
 import ErrorState from '@/components/ErrorState'
-import ListLayout from '@/layouts/ListLayout'
+import TableLayout from '@/layouts/TableLayout'
 import { columns } from '@/components/AppointmentsDataTable/columns'
 import AppointmentsDataTable from '@/components/AppointmentsDataTable'
 import AppointmentsCalendar from '@/components/AppointmentsCalendar'
@@ -46,12 +46,12 @@ const ListAppointments = () => {
     return view === 'calendar' ? (
       <AppointmentsCalendar.Skeleton />
     ) : (
-      <ListLayout
+      <TableLayout
         title="Agendamentos de Vacinação"
         description="Carregando seus agendamentos de vacinação..."
       >
         <AppointmentsDataTable.Skeleton />
-      </ListLayout>
+      </TableLayout>
     )
 
   if (error) return <ErrorState onRetry={handleRetry} />
@@ -72,12 +72,12 @@ const ListAppointments = () => {
   ) : (
     <>
       {tabButton}
-      <ListLayout
+      <TableLayout
         title="Agendamentos de Vacinação"
         description="Gerencie e visualize seus agendamentos de vacinação."
       >
         <AppointmentsDataTable data={sortedData} columns={columns} />
-      </ListLayout>
+      </TableLayout>
     </>
   )
 }
