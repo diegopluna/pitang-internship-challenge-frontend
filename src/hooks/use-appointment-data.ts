@@ -6,14 +6,19 @@ import { LIST_APPOINTMENTS_CALENDAR_KEY } from '@/constants'
 import { Appointment, GroupedAppointments } from '@/@types/appointment'
 import useLocalStorage from '@/hooks/use-local-storage'
 
+// hook to return data for the appointment list
 const useAppointmentData = (appointments: Appointment[]) => {
+  
+  // get the selected date from local storage
   const [selectedDate, setSelectedDate] = useLocalStorage(
     LIST_APPOINTMENTS_CALENDAR_KEY,
     new Date(),
   )
 
+  // format the selected date
   const formattedSelectedDate = format(selectedDate, 'dd/MM/yyyy')
 
+  // group the appointments by date and hour
   const groupedAppointments = useMemo(
     () =>
       appointments!.reduce((acc, appointment) => {
@@ -36,10 +41,12 @@ const useAppointmentData = (appointments: Appointment[]) => {
     [appointments],
   )
 
+  // get the dates of the appointments
   const appointmentDates = appointments.map(
     (appointment) => new Date(appointment.appointmentDate),
   )
 
+  // count the occurrences of the dates
   const dateOccurrences = appointmentDates.reduce(
     (acc, date) => {
       const dateKey = format(date, 'yyyy-MM-dd')
@@ -49,6 +56,7 @@ const useAppointmentData = (appointments: Appointment[]) => {
     {} as Record<string, number>,
   )
 
+  // get the dates of the full and not full days
   const notFullDays: Date[] = []
   const fullDays: Date[] = []
 
@@ -60,6 +68,7 @@ const useAppointmentData = (appointments: Appointment[]) => {
     }
   })
 
+  // get the highlighted days
   const highlightedDays: HighlightDate[] = [
     {
       'react-datepicker__day--highlighted-full': fullDays,
@@ -69,6 +78,7 @@ const useAppointmentData = (appointments: Appointment[]) => {
     },
   ]
 
+  // return the data
   return {
     selectedDate,
     formattedSelectedDate,

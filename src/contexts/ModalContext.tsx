@@ -8,7 +8,9 @@ type ModalContextType = {
   closeModal: () => void
 }
 
-const ModalContext = createContext<ModalContextType | undefined>(undefined)
+export const ModalContext = createContext<ModalContextType | undefined>(
+  undefined,
+)
 
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({
   children,
