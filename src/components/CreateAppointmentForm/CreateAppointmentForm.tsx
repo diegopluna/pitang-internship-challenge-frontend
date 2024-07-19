@@ -51,6 +51,7 @@ const CreateAppointmentForm = () => {
             <FormControl>
               <CustomDatePicker
                 futureYears={0}
+                // Birthday cannot be in the future
                 maxDate={new Date()}
                 selected={field.value}
                 onChange={(date) => field.onChange(date)}
@@ -70,31 +71,43 @@ const CreateAppointmentForm = () => {
             <FormControl>
               <CustomDatePicker
                 showTimeSelect
+                // Only allow time intervals of 60 minutes
                 timeIntervals={60}
+                // Past years are not allowed
                 pastYears={0}
                 timeCaption="Horário"
+                // Get the minimum allowed date for an appointment
                 minDate={getMinDate()}
+                // If no date is selected, set the minimum date
                 selected={field.value || getMinDate()}
                 onChange={(date) => {
+                  // if not date is selected return early
                   if (!date) return
+                  // set minutes, seconds and ms to 0
                   date.setMinutes(0, 0, 0)
+                  // get the earliest possible time for the appointment
                   const minTime = getMinTime(date)
+                  // get the latest possible time for the appointment
                   const maxTime = getMaxTime()
 
+                  // If the earliest possible time is after the latest possible time, return early
                   if (minTime.getHours() > maxTime.getHours()) {
                     return
                   }
 
+                  // If the selected time is before the earliest possible time, set the earliest possible time
                   if (date.getHours() < minTime.getHours()) {
                     date.setHours(minTime.getHours())
-                  } else if (date.getHours() === minTime.getHours()) {
-                    date.setHours
                   }
 
+                  // Set the selected time
                   field.onChange(date)
                 }}
+                // Get the minimum allowed time for an appointment
                 minTime={getMinTime(field.value)}
+                // Get the maximum allowed time for an appointment
                 maxTime={getMaxTime()}
+                // Filter the time for an appointment based on the selected date
                 filterTime={(time) =>
                   filterAppointmentTime(time, field.value || new Date())
                 }
