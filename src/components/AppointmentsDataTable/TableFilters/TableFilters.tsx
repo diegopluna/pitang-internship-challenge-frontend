@@ -32,9 +32,13 @@ const TableFilters = <TData,>({ table }: TableFiltersProps<TData>) => {
               (table.getColumn('appointmentDate')?.getFilterValue() as Date) ??
               null
             }
-            onChange={(date) =>
-              table.getColumn('appointmentDate')?.setFilterValue(date)
-            }
+            onChange={(date) => {
+              if (!date) {
+                table.getColumn('appointmentDate')?.setFilterValue(undefined)
+              } else {
+                table.getColumn('appointmentDate')?.setFilterValue(date)
+              }
+            }}
             placeholderText="Filtrar por data de agendamento"
             data-testid="date-picker-button"
           />
