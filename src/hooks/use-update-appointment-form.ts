@@ -33,15 +33,12 @@ export const useUpdateAppointmentForm = (appointment: Appointment) => {
     .max(new Date(), {
       message: 'Data de nascimento não pode ser maior que a data atual',
     }),
-  appointmentDate: z.union([
-    z.date({
-      message: 'Data da consulta é obrigatória',
+  appointmentDate: z.date({
+    message: 'Data da consulta é obrigatória',
     })
     .min(new Date(), {
       message: 'Data da consulta não pode ser menor que a data atual',
     }),
-    z.date()
-  ]),
   vaccinationComplete: z.boolean({
     message: "Estado da vacinação é obrigatório"
   })
