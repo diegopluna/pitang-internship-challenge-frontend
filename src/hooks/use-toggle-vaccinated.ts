@@ -16,7 +16,7 @@ export const useToggleVaccinated = () => {
     },
     onError: (error) => {
       toast.error('Erro ao atualizar status de vacinação!')
-      handleApiError(error)
+      throw handleApiError(error)
     }
   })
 }
