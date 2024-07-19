@@ -44,7 +44,7 @@ const CustomInput = forwardRef<HTMLButtonElement, CustomInputProps>(
         onClick={onClick}
         ref={ref}
         className={cn(
-          'w-full justify-start text-left font-normal',
+          'w-full justify-start text-left font-normal h-fit text-wrap md:h-10 md:text-nowrap',
           !selected && 'text-muted-foreground',
           isClearable && 'pr-10',
         )}
